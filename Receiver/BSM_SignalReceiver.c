@@ -17,6 +17,7 @@ int Claculate_MovingAvg(float SignalValue,MinMaxAvg *Avg);
 int delimit(char str[100],InputSignalConfig* BSM_Signals);
 int Split(char str[100],InputSignalConfig* BSM_Signals);
 int IsValidSignalValue(InputSignalConfig* BSM_Signals, char *token, int * cnt);
+void CountDotandNonDigit(char *token,int *DotCounter,int *NonDigitCounter);
 int IsValidSignalName(InputSignalConfig* BSM_Signals, char *token, int * cnt);
 
 /*************************************************** function Definitions **************************************************/ 
@@ -163,17 +164,9 @@ int IsValidSignalValue(InputSignalConfig* BSM_Signals, char *token, int * cnt)
     
        bool InputMsgFormateError=false;
     
-     for(int itr=0;itr<strlen(token);itr++)
-                {   
-                    if(token[itr]=='.')
-                    {
-                        DotCounter++;
-                    }
-                    else if(token[itr] < '0' || token[itr] > '9')
-                    {
-                        NonDigitCounter++;
-                    }
-                }
+
+    CountDotandNonDigit(token,&DotCounter,&NonDigitCounter);
+    
                 
              if(DotCounter>1 || NonDigitCounter>0)
                 {
@@ -188,6 +181,22 @@ int IsValidSignalValue(InputSignalConfig* BSM_Signals, char *token, int * cnt)
            return  InputMsgFormateError;
                 
 }
+
+void CountDotandNonDigit(char *token,int *DotCounter,int *NonDigitCounter)
+{
+         for(int itr=0;itr<strlen(token);itr++)
+                {   
+                    if(token[itr]=='.')
+                    {
+                        *DotCounter++;
+                    }
+                    else if(token[itr] < '0' || token[itr] > '9')
+                    {
+                        *NonDigitCounter++;
+                    }
+                }
+}
+
 
 int IsValidSignalName(InputSignalConfig* BSM_Signals, char *token, int * cnt)
 {
