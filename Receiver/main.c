@@ -1,15 +1,15 @@
 /******************************************************* Header_Files *******************************************************/
 
-#include "SignalProvider.h"
+#include "SignalReceiver.h"
 
 /********************************************** Function/Variable Declarations **********************************************/ 
 
-extern int BSM_SignalProvider(OutputTarget OutputTargetIndex);
+extern int BSM_SignalReceiver();
 
 /*************************************************** function Definitions ***************************************************/ 
 
 int main()
 {
-  BSM_SignalProvider(TO_CONSOLE);
+  BSM_SignalReceiver();
   return 0;
 }
