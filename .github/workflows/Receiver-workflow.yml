@@ -17,9 +17,9 @@ jobs:
         sudo apt-get install -y gcovr
         
     - name: build for test
-    run: g++ -DUNIT_TEST -Wall -Wextra -fprofile-arcs -ftest-coverage -o testchecker ./Receiver/main.c ./Receiver/BSM_SignalReceiver.c
-    
-    - name: test code run
+      run: g++ -DUNIT_TEST -Wall -Wextra -fprofile-arcs -ftest-coverage -o testchecker ./Receiver/main.c ./Receiver/BSM_SignalReceiver.c
+      
+    - name: test code run  
       run: ./testchecker
 
     - name: collect coverage
