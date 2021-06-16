@@ -154,7 +154,7 @@ int Split(char str[100],InputSignalConfig* BSM_Signals)
          cnt++;
          
          
-        token = strtok('\0', s);
+        token = strtok(NULL, s);
    }
    return InputMsgFormateError;
 }
