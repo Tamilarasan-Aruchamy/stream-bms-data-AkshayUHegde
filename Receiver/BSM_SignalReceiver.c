@@ -48,7 +48,7 @@ int BSM_SignalReceiver()
 	{
 		
 	//	scanf("%s",BSM_InputMessage);
-		returnval=delimit(BSM_InputMessage[i],&InputData);
+		returnval=delimit(BSM_InputMessage[i],InputData);
 		
 		if(returnval)
 		    {
