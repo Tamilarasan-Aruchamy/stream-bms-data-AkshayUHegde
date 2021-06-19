@@ -186,10 +186,11 @@ int IsValidSignalValue(InputSignalConfig* BSM_Signals, char *token, int * cnt, i
     int NonDigitCounter=0,DotCounter=0;
 
     
-
-    CountDots(token,&DotCounter);
-    CountNonDigit(token,&NonDigitCounter);
-    
+for(int itr=0;itr<strlen(token);itr++)
+{
+    CountDots(token[itr],&DotCounter);
+    CountNonDigit(token[itr],&NonDigitCounter);
+}
                 if(DotCounter>1 || NonDigitCounter>0)
                 { 
                     *InputMsgFormateError=true;
@@ -204,30 +205,25 @@ int IsValidSignalValue(InputSignalConfig* BSM_Signals, char *token, int * cnt, i
                 
 }
 
-void CountDots(char *token,int *DotCounter)
+void CountDots(char token,int *DotCounter)
 {
-         for(int itr=0;itr<strlen(token);itr++)
-                {  
-                    if(token[itr]=='.')
+                    if(token=='.')
                     {
                         
                         *DotCounter=*DotCounter+1;
                     }
-                }
 }
 
-void CountNonDigit(char *token,int *NonDigitCounter)
+void CountNonDigit(char token,int *NonDigitCounter)
 {
-         for(int itr=0;itr<strlen(token);itr++)
-                {   
-                    if((token[itr] < '0' || token[itr] > '9') && token[itr]!='.')
+  
+                    if((token < '0' || token > '9') && token!='.')
                     {
                         *NonDigitCounter=*NonDigitCounter+1;
 
                     }
-                }
-}
 
+}
 
 int IsValidSignalName(InputSignalConfig* BSM_Signals, char *token, int * cnt, int*InputMsgFormateError)
 {
