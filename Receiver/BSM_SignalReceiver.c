@@ -11,23 +11,24 @@
 /********************************************** Function/Variable Declarations **********************************************/ 
 
 static char InputSignalName[2][15]={"\"charge_rate\"","\"temp_in_c\""};
-
+int BSM_SignalReceiver();
 int Calculate_MinMax(float SignalValue,MinMaxAvg *MinMax);
-int Claculate_MovingAvg(float SignalValue,MinMaxAvg *Avg);
+int delimit(char str[100],InputSignalConfig* BSM_Signals);
+float movingAvg(float *ptrArrNumbers, float *ptrSum, int pos, int len, float nextNum);
 int delimit(char str[100],InputSignalConfig* BSM_Signals);
 int Split(char str[100],InputSignalConfig* BSM_Signals);
-int IsValidSignalValue(InputSignalConfig* BSM_Signals, char *token, int * cnt);
+int IsValidSignalValue(InputSignalConfig* BSM_Signals, char *token, int * cnt, int *InputMsgFormateError);
 void CountDots(char *token,int *DotCounter);
 void CountNonDigit(char *token,int *NonDigitCounter);
-int IsValidSignalName(InputSignalConfig* BSM_Signals, char *token, int * cnt);
+int IsValidSignalName(InputSignalConfig* BSM_Signals, char *token, int * cnt, int *InputMsgFormateError);
 
 /*************************************************** function Definitions **************************************************/ 
 int BSM_SignalReceiver()
 {
-   char BSM_InputMessage[15][100]={"{\"charge_rate\": 8.69, \"temp_in_c\": 5.26}",\
-                                    "{\"charge_rate\": 9.69, \"temp_in_c\": 6.26}",\
+    char BSM_InputMessage[15][100]={"{\"charge_rate\": 18.69, \"temp_in_c\": 5.26}",\
+                                    "{\"charge_rate\": j9.69, \"temp_in_c\": 6.26}",\
                                     "{\"charge_rate\": 10.69, \"temp_in_c\": 7.26}",\
-                                    "{\"charge_rate\": 11.69, \"temp_in_c\": 8.26}",\
+                                    "{\"charge_rate\": 199.69, \"temp_in_c\": 8.26}",\
                                     "{\"charge_rate\": 12.69, \"temp_in_c\": 9.26}",\
                                     "{\"charge_rate\": 13.69, \"temp_in_c\": 10.26}",\
                                     "{\"charge_rate\": 14.69, \"temp_in_c\": 11.26}",\
@@ -43,36 +44,52 @@ int BSM_SignalReceiver()
     InputSignalConfig InputData[2]={{NULL,32767},{NULL,32767}};
     int returnval;
     MinMaxAvg Temp={32767,-32767,0},ChargeRate={32767,-32767,0};
+    
+    float arrNumbers[2][5] = {0};
 
-    for(int i=0; i<15 ; i++)
+  int pos = 0;
+  float sum[2] = {0};
+  int len=0;
+
+    for(int i=0; i<5 ; i++)
 	{
 		
 	//	scanf("%s",BSM_InputMessage);
 		returnval=delimit(BSM_InputMessage[i],InputData);
 		
-		if(returnval)
-		    {
-		        printf("InputMessage Invalid or InputMessage Formate Error\n");
-		    }
+		if(!returnval)
+		  //  {
+		 //       printf("InputMessage Invalid or InputMessage Formate Error\n");
+		  //  }
 
-        else
+       // else
             {
-                printf("%s\n", InputData[0].SignalName);
-                printf("%f\n", InputData[0].SignalValue);
-                printf("%s\n", InputData[1].SignalName);
-                printf("%f\n", InputData[1].SignalValue);
+              // printf("%s\n", InputData[0].SignalName);
+              //  printf("%f\n", InputData[0].SignalValue);
+              //  printf("%s\n", InputData[1].SignalName);
+             //  printf("%f\n\n\n", InputData[1].SignalValue);
                 
                 Calculate_MinMax(InputData[0].SignalValue, &Temp);
                 Calculate_MinMax(InputData[1].SignalValue, &ChargeRate);
-                Claculate_MovingAvg(InputData[0].SignalValue, &Temp);
-                Claculate_MovingAvg(InputData[1].SignalValue, &ChargeRate);
+
                
-               printf("Min:%f Max:%f\n", Temp.MinValue,Temp.MaxValue);
-               printf("Min:%f Max:%f\n", ChargeRate.MinValue,ChargeRate.MaxValue);
+               if(len<5)
+                    {
+                    len++;
+                    }
+                Temp.MovingAvg = movingAvg(arrNumbers[0], &sum[0], pos, len, InputData[0].SignalValue);
+               // printf("%f\n", sum[0]);
+                ChargeRate.MovingAvg = movingAvg(arrNumbers[1], &sum[1], pos, len, InputData[1].SignalValue);
+                pos++;
+                if (pos >= 5){
+                    pos = 0;
+                    }
+               
+               
+              printf("TempMin:%f TempMax:%f TempAvg:%f ChargeRateMin:%f ChargeRateMax:%f ChargeRateAvg:%f\n", Temp.MinValue,Temp.MaxValue,Temp.MovingAvg,ChargeRate.MinValue,ChargeRate.MaxValue,ChargeRate.MovingAvg);
                
             }
 	}
-    
     
     
 }
@@ -91,10 +108,16 @@ int Calculate_MinMax(float SignalValue,MinMaxAvg *MinMax)
 }
 
 
-int Claculate_MovingAvg(float SignalValue,MinMaxAvg *Avg)
+float movingAvg(float *ptrArrNumbers, float *ptrSum, int pos, int len, float nextNum)
 {
-    
+  //Subtract the oldest number from the prev sum, add the new number
+  *ptrSum = *ptrSum - ptrArrNumbers[pos] + nextNum;
+  //Assign the nextNum to the position in the array
+  ptrArrNumbers[pos] = nextNum;
+  //return the average
+  return *ptrSum / (float)len;
 }
+
 
 int delimit(char str[100],InputSignalConfig* BSM_Signals) {
    //char str[190] = "{\"charge_rate\": 8.69, \"temp_in_c\": 5.26}";
@@ -136,13 +159,13 @@ int Split(char str[100],InputSignalConfig* BSM_Signals)
         {
         if(cnt%2)
             {   
-                InputMsgFormateError=IsValidSignalValue(BSM_Signals, token, &cnt);
+               IsValidSignalValue(BSM_Signals, token, &cnt, &InputMsgFormateError);
             
             }
         else
             {
 
-                InputMsgFormateError=IsValidSignalName(BSM_Signals, token, &cnt);
+                IsValidSignalName(BSM_Signals, token, &cnt, &InputMsgFormateError);
             }
 
         }
@@ -152,27 +175,24 @@ int Split(char str[100],InputSignalConfig* BSM_Signals)
 
         }
          cnt++;
-         
-         
+
         token = strtok(NULL, s);
    }
    return InputMsgFormateError;
 }
 
-int IsValidSignalValue(InputSignalConfig* BSM_Signals, char *token, int * cnt)
+int IsValidSignalValue(InputSignalConfig* BSM_Signals, char *token, int * cnt, int *InputMsgFormateError)
 {
     int NonDigitCounter=0,DotCounter=0;
-    
-       bool InputMsgFormateError=false;
+
     
 
     CountDots(token,&DotCounter);
     CountNonDigit(token,&NonDigitCounter);
     
-                
-             if(DotCounter>1 || NonDigitCounter>0)
-                {
-                    InputMsgFormateError=true;
+                if(DotCounter>1 || NonDigitCounter>0)
+                { 
+                    *InputMsgFormateError=true;
 
                 }
             
@@ -180,17 +200,18 @@ int IsValidSignalValue(InputSignalConfig* BSM_Signals, char *token, int * cnt)
                 {  
                     BSM_Signals[*cnt/2].SignalValue=atof(token);
                 }
-           return  InputMsgFormateError;
+           return  0;
                 
 }
 
 void CountDots(char *token,int *DotCounter)
 {
          for(int itr=0;itr<strlen(token);itr++)
-                {   
+                {  
                     if(token[itr]=='.')
                     {
-                        *DotCounter++;
+                        
+                        *DotCounter=*DotCounter+1;
                     }
                 }
 }
@@ -199,26 +220,25 @@ void CountNonDigit(char *token,int *NonDigitCounter)
 {
          for(int itr=0;itr<strlen(token);itr++)
                 {   
-                    if(token[itr] < '0' || token[itr] > '9')
+                    if((token[itr] < '0' || token[itr] > '9') && token[itr]!='.')
                     {
-                        *NonDigitCounter++;
+                        *NonDigitCounter=*NonDigitCounter+1;
+
                     }
                 }
 }
 
 
-
-
-int IsValidSignalName(InputSignalConfig* BSM_Signals, char *token, int * cnt)
+int IsValidSignalName(InputSignalConfig* BSM_Signals, char *token, int * cnt, int*InputMsgFormateError)
 {
-       bool InputMsgFormateError=false;
+      
     
             if(strcmp(InputSignalName[*cnt/2],token))
                 {
-                   InputMsgFormateError=true;
+                   *InputMsgFormateError=true;
                 }
                 
                 BSM_Signals[*cnt/2].SignalName=token;
                 
-            return  InputMsgFormateError;
+            return  0;
 }
