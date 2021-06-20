@@ -3,7 +3,8 @@
 #include "../test/catch.hpp"
 #include "SignalReceiver.h"
 #include "BMS_ReceiverTestDoublesHeader.h"
-#include<string.h>
+#include <string.h>
+#include <stdlib.h>
 
 extern int BSM_SignalReceiver();
 
@@ -90,11 +91,11 @@ TEST_CASE("Test the Min Max and Avg")
 
 	REQUIRE(ConsoleOutputTemperatureMin[i]==Expected_MinMaxAvg[i][0].MinValue);
 	REQUIRE(ConsoleOutputTemperatureMax[i]==Expected_MinMaxAvg[i][0].MaxValue);
-	REQUIRE(ConsoleOutputTemperatureMovingAvg[i]==Expected_MinMaxAvg[i][0].MovingAvg);
+	REQUIRE(abs(ConsoleOutputTemperatureMovingAvg[i]-Expected_MinMaxAvg[i][0].MovingAvg)<0.1);
 	
 	REQUIRE(ConsoleOutputChargeRateMin[i]==Expected_MinMaxAvg[i][1].MinValue);
 	REQUIRE(ConsoleOutputChargeRateMax[i]==Expected_MinMaxAvg[i][1].MaxValue);
-	REQUIRE(ConsoleOutputChargeRateMovingAvg[i]==Expected_MinMaxAvg[i][1].MovingAvg);
+	REQUIRE(abs(ConsoleOutputChargeRateMovingAvg[i]-Expected_MinMaxAvg[i][1].MovingAvg)<0.1);
 		
 			
 	}
