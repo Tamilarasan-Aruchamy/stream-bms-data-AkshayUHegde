@@ -14,23 +14,23 @@ extern int BSM_SignalReceiver();
 class Assert {
 
   public:
-    void AssertOutput(int);
+    void AssertOutput(int,MinMaxAvg);
 };
 
 
 //AssertOutput(int i, MinMaxAvg Expected_MinMaxAvg[2])
-void Assert :: AssertOutput(int i)
+void Assert :: AssertOutput(int Index,MinMaxAvg Expected_MinMaxAvg[2])
 {
-	/*REQUIRE(strcmp(ConsoleInputFormat[i],"%s")==0);
+	REQUIRE(strcmp(ConsoleInputFormat[Index],"%s")==0);
 	
-	REQUIRE(strcmp(ConsoleOutputFormat[i],"TempMin:%0.2f TempMax:%0.2f TempAvg:%0.2f ChargeRateMin:%0.2f ChargeRateMax:%0.2f ChargeRateAvg:%0.2f\n")==0);
-	REQUIRE(ConsoleOutputTemperatureMin[i]==Expected_MinMaxAvg[0].MinValue);
-	REQUIRE(ConsoleOutputTemperatureMax[i]==Expected_MinMaxAvg[0].MaxValue);
-	REQUIRE(abs(ConsoleOutputTemperatureMovingAvg[i]-Expected_MinMaxAvg[0].MovingAvg)<0.1);
+	REQUIRE(strcmp(ConsoleOutputFormat[Index],"TempMin:%0.2f TempMax:%0.2f TempAvg:%0.2f ChargeRateMin:%0.2f ChargeRateMax:%0.2f ChargeRateAvg:%0.2f\n")==0);
+	REQUIRE(ConsoleOutputTemperatureMin[Index]==Expected_MinMaxAvg[0].MinValue);
+	REQUIRE(ConsoleOutputTemperatureMax[Index]==Expected_MinMaxAvg[0].MaxValue);
+	REQUIRE(abs(ConsoleOutputTemperatureMovingAvg[Index]-Expected_MinMaxAvg[0].MovingAvg)<0.1);
 	
-	REQUIRE(ConsoleOutputChargeRateMin[i]==Expected_MinMaxAvg[1].MinValue);
-	REQUIRE(ConsoleOutputChargeRateMax[i]==Expected_MinMaxAvg[1].MaxValue);
-	REQUIRE(abs(ConsoleOutputChargeRateMovingAvg[i]-Expected_MinMaxAvg[1].MovingAvg)<0.1); */
+	REQUIRE(ConsoleOutputChargeRateMin[Index]==Expected_MinMaxAvg[1].MinValue);
+	REQUIRE(ConsoleOutputChargeRateMax[Index]==Expected_MinMaxAvg[1].MaxValue);
+	REQUIRE(abs(ConsoleOutputChargeRateMovingAvg[Index]-Expected_MinMaxAvg[1].MovingAvg)<0.1); */
 }
 
 
@@ -89,8 +89,8 @@ TEST_CASE("Test the Func Call,Min, Max and Avg")
 	
 	for(int i=0;i<15;i++)
 	{
-		Assert.AssertOutput(i);
-	//AssertOutput(i,	Expected_MinMaxAvg[i]);	
+		//Assert.AssertOutput(i);
+	Output.AssertOutput(i,	Expected_MinMaxAvg[i]);	
 		
 	/*REQUIRE(strcmp(ConsoleInputFormat[i],"%s")==0);
 	REQUIRE(strcmp(ConsoleOutputFormat[i],"TempMin:%0.2f TempMax:%0.2f TempAvg:%0.2f ChargeRateMin:%0.2f ChargeRateMax:%0.2f ChargeRateAvg:%0.2f\n")==0);
@@ -110,7 +110,7 @@ TEST_CASE("Test the Func Call,Min, Max and Avg")
 TEST_CASE("Test the wrong Input Message") 
 {
 	ResetTestInterface();
-	//Assert Output;
+	Assert Output;
 	char BSM_InputMessage_TestData_2[15][100]={"{\"charge_rate\": 8.69, \"temp_in_c\": 15.26}",\
                                     "{\"charge_ratee\": 1.69, \"temp_in_c\": 16.26}",\
                                     "{\"charge_rate\": 2.69, \"temp_in_ca\": 121.26}",\
@@ -150,8 +150,8 @@ TEST_CASE("Test the wrong Input Message")
 	}
 	for(int i=0;i<8;i++)
 	{
-		Assert.AssertOutput(i);
-		//AssertOutput(i,	Expected_MinMaxAvg[i]);	
+		//Output.AssertOutput(i,);
+		Output.AssertOutput(i,	Expected_MinMaxAvg[i]);	
 		
 /*	REQUIRE(strcmp(ConsoleOutputFormat[i],"TempMin:%0.2f TempMax:%0.2f TempAvg:%0.2f ChargeRateMin:%0.2f ChargeRateMax:%0.2f ChargeRateAvg:%0.2f\n")==0);
 	REQUIRE(ConsoleOutputTemperatureMin[i]==Expected_MinMaxAvg[i][0].MinValue);
