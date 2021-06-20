@@ -19,10 +19,10 @@ int delimitAndValidateMessage(char str[100],InputSignalConfig* BSM_Signals);
 float movingAvg(float *ptrArrNumbers, float *ptrSum, int pos, int len, float nextNum);
 int delimit(char str[100],InputSignalConfig* BSM_Signals);
 int delimitAndValidateSignals(char str[100],InputSignalConfig* BSM_Signals);
-int IsValidSignalValue(InputSignalConfig* BSM_Signals, char *token, int * cnt, int *InputMsgFormateError);
+int IsValidSignalValue(InputSignalConfig* BSM_Signals, char *token, int * cnt, int *FormatErrorDetected);
 int CountDots(char token,int *DotCounter);
 int CountNonDigit(char token,int *NonDigitCounter);
-int IsValidSignalName(InputSignalConfig* BSM_Signals, char *token, int * cnt, int *InputMsgFormateError);
+int IsValidSignalName(InputSignalConfig* BSM_Signals, char *token, int * cnt, int *FormatErrorDetected);
 
 /*************************************************** function Definitions **************************************************/ 
 int BSM_SignalReceiver()
