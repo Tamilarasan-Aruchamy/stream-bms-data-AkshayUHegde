@@ -13,7 +13,7 @@ TEST_CASE("Test the Number scanf function calls")
 	ResetTestInterface();
 	
 	char BSM_InputMessage[15][100]={"{\"charge_rate\": 18.69, \"temp_in_c\": 5.26}",\
-                                    "{\"charge_rate\": j9.69, \"temp_in_c\": 6.26}",\
+                                    "{\"charge_rate\": 9.69, \"temp_in_c\": 6.26}",\
                                     "{\"charge_rate\": 10.69, \"temp_in_c\": 7.26}",\
                                     "{\"charge_rate\": 199.69, \"temp_in_c\": 8.26}",\
                                     "{\"charge_rate\": 12.69, \"temp_in_c\": 9.26}",\
@@ -34,5 +34,7 @@ TEST_CASE("Test the Number scanf function calls")
 	REQUIRE(BSM_SignalReceiver()==0);
 	REQUIRE(scanf_Func_CallCount==15);
 	REQUIRE(printf_Func_CallCount==15);
+	
+	REQUIRE(ConsoleOutputTemperatureMin[3]==10.69);
 }
 
