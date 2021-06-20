@@ -7,20 +7,8 @@
 #include <stdlib.h>
 
 extern int BSM_SignalReceiver();
+AssertOutput(int i, MinMaxAvg Expected_MinMaxAvg[2]);
 
-AssertOutput(int i, MinMaxAvg Expected_MinMaxAvg[2])
-{
-	REQUIRE(strcmp(ConsoleInputFormat[i],"%s")==0);
-	
-	REQUIRE(strcmp(ConsoleOutputFormat[i],"TempMin:%0.2f TempMax:%0.2f TempAvg:%0.2f ChargeRateMin:%0.2f ChargeRateMax:%0.2f ChargeRateAvg:%0.2f\n")==0);
-	REQUIRE(ConsoleOutputTemperatureMin[i]==Expected_MinMaxAvg[0].MinValue);
-	REQUIRE(ConsoleOutputTemperatureMax[i]==Expected_MinMaxAvg[0].MaxValue);
-	REQUIRE(abs(ConsoleOutputTemperatureMovingAvg[i]-Expected_MinMaxAvg[0].MovingAvg)<0.1);
-	
-	REQUIRE(ConsoleOutputChargeRateMin[i]==Expected_MinMaxAvg[1].MinValue);
-	REQUIRE(ConsoleOutputChargeRateMax[i]==Expected_MinMaxAvg[1].MaxValue);
-	REQUIRE(abs(ConsoleOutputChargeRateMovingAvg[i]-Expected_MinMaxAvg[1].MovingAvg)<0.1);
-}
 
 TEST_CASE("Test the Func Call,Min, Max and Avg") 
 {
@@ -144,3 +132,18 @@ TEST_CASE("Test the wrong Input Message")
 	*/
 	}	
 }
+
+AssertOutput(int i, MinMaxAvg Expected_MinMaxAvg[2])
+{
+	REQUIRE(strcmp(ConsoleInputFormat[i],"%s")==0);
+	
+	REQUIRE(strcmp(ConsoleOutputFormat[i],"TempMin:%0.2f TempMax:%0.2f TempAvg:%0.2f ChargeRateMin:%0.2f ChargeRateMax:%0.2f ChargeRateAvg:%0.2f\n")==0);
+	REQUIRE(ConsoleOutputTemperatureMin[i]==Expected_MinMaxAvg[0].MinValue);
+	REQUIRE(ConsoleOutputTemperatureMax[i]==Expected_MinMaxAvg[0].MaxValue);
+	REQUIRE(abs(ConsoleOutputTemperatureMovingAvg[i]-Expected_MinMaxAvg[0].MovingAvg)<0.1);
+	
+	REQUIRE(ConsoleOutputChargeRateMin[i]==Expected_MinMaxAvg[1].MinValue);
+	REQUIRE(ConsoleOutputChargeRateMax[i]==Expected_MinMaxAvg[1].MaxValue);
+	REQUIRE(abs(ConsoleOutputChargeRateMovingAvg[i]-Expected_MinMaxAvg[1].MovingAvg)<0.1);
+}
+
