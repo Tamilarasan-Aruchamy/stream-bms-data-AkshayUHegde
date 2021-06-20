@@ -2,11 +2,9 @@
 
 #include "SignalReceiver.h"
 #include <string.h>
-#include <stdbool.h>
-#include <ctype.h>
 
 #ifdef UNIT_TEST   	// include when building the Test code
-	#include "BMS_TestDoublesHeader.h"   
+	#include "BMS_ReceiverTestDoublesHeader.h"   
 #else			// include when building the Production code
 	#include <stdio.h>
 	#include <stdlib.h>
@@ -112,7 +110,7 @@ int delimit(char str[100],InputSignalConfig* BSM_Signals) {
    //char str[190] = "{\"charge_rate\": 8.69, \"temp_in_c\": 5.26}";
 
    
-   bool InputMsgFormateError=0;
+   int InputMsgFormateError=0;
 
    if(str[0] != '{')
    {
