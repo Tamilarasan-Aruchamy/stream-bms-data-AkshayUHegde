@@ -6,17 +6,17 @@
 /******************************************* /MacroFunction/Variable Declarations *******************************************/ 
 
 int scanf(char *format, char * InputBuffer);
-int printf(char *format, float Temp_MinValue, float Temp_MaxValue, float Temp_MovingAvg, float ChargeRate_MinValue, float ChargeRate_MaxValue, float ChargeRate_MovingAvg);
+int printf(char *format, float ChargeRate_MinValue, float ChargeRate_MaxValue, float ChargeRate_MovingAvg, float Temp_MinValue, float Temp_MaxValue, float Temp_MovingAvg);
 
 char InputMessageBuf[15][100];
 char ConsoleInputFormat[15][5];
 char ConsoleOutputFormat[15][200];
-float	ConsoleOutputTemperatureMin[15];
-float	ConsoleOutputTemperatureMax[15];
-float	ConsoleOutputTemperatureMovingAvg[15];
 float	ConsoleOutputChargeRateMin[15];
 float	ConsoleOutputChargeRateMax[15];
 float	ConsoleOutputChargeRateMovingAvg[15];
+float	ConsoleOutputTemperatureMin[15];
+float	ConsoleOutputTemperatureMax[15];
+float	ConsoleOutputTemperatureMovingAvg[15];
 int printf_Func_CallCount=0;
 int scanf_Func_CallCount=0;
 int ResetScanfMsgIndex=1;
@@ -56,7 +56,7 @@ int scanf(char *format, char * InputBuffer)
 }
 
 
-int printf(char *format, float Temp_MinValue, float Temp_MaxValue, float Temp_MovingAvg, float ChargeRate_MinValue, float ChargeRate_MaxValue, float ChargeRate_MovingAvg)
+int printf(char *format, float ChargeRate_MinValue, float ChargeRate_MaxValue, float ChargeRate_MovingAvg, float Temp_MinValue, float Temp_MaxValue, float Temp_MovingAvg)
 {	
 	static int MsgIndex=0;
 	
@@ -68,12 +68,12 @@ int printf(char *format, float Temp_MinValue, float Temp_MaxValue, float Temp_Mo
 	}
 		
 	strcpy(ConsoleOutputFormat[MsgIndex],format);
-	ConsoleOutputTemperatureMin[MsgIndex]=Temp_MinValue;
-	ConsoleOutputTemperatureMax[MsgIndex]=Temp_MaxValue;
-	ConsoleOutputTemperatureMovingAvg[MsgIndex]=Temp_MovingAvg;
 	ConsoleOutputChargeRateMin[MsgIndex]=ChargeRate_MinValue;
 	ConsoleOutputChargeRateMax[MsgIndex]=ChargeRate_MaxValue;
 	ConsoleOutputChargeRateMovingAvg[MsgIndex]=ChargeRate_MovingAvg;
+	ConsoleOutputTemperatureMin[MsgIndex]=Temp_MinValue;
+	ConsoleOutputTemperatureMax[MsgIndex]=Temp_MaxValue;
+	ConsoleOutputTemperatureMovingAvg[MsgIndex]=Temp_MovingAvg;
 
 	printf_Func_CallCount++;
 	
