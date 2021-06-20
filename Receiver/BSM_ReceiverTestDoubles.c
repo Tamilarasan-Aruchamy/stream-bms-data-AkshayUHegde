@@ -48,7 +48,7 @@ int scanf(char *format, char * InputBuffer)
 	
 	ConsoleInputFormat[MsgBufIndex]=format;
 	strcpy(InputBuffer,InputMessageBuf[MsgBufIndex]);
-	//strcpy(ConsoleInputValue[MsgBufIndex],InputBuffer);
+	strcpy(ConsoleInputValue[MsgBufIndex],InputBuffer);
 	
 	scanf_Func_CallCount++;
 	
