@@ -51,7 +51,7 @@ int BSM_SignalReceiver()
 			  ChargeRate.MovingAvg = movingAvg(MovAvg_ArrNumbers[0], &sum[0], pos, MovAvg_len, InputData[0].SignalValue);  // Calculate MovAvg for ChargeRate Signal
 			  Temp.MovingAvg = movingAvg(MovAvg_ArrNumbers[1], &sum[1], pos, MovAvg_len, InputData[1].SignalValue); // Calculate MovAvg for Temperature Signal
                 
-			  printf("ChargeRateMin:%0.2f ChargeRateMax:%0.2f ChargeRateAvg:%0.2f TempMin:%0.2f TempMax:%0.2f TempAvg:%0.2f\n", /
+			  printf("ChargeRateMin:%0.2f ChargeRateMax:%0.2f ChargeRateAvg:%0.2f TempMin:%0.2f TempMax:%0.2f TempAvg:%0.2f\n", \
 				 ChargeRate.MinValue,ChargeRate.MaxValue,ChargeRate.MovingAvg,Temp.MinValue,Temp.MaxValue,Temp.MovingAvg);
     		
 			  pos++;
@@ -107,7 +107,7 @@ int delimitAndValidateMessage(char str[100],InputSignalConfig* BSM_Signals)
    		}
    
    return FormatErrorDetected;
-
+}
 
 
 int delimitAndValidateSignals(char str[100],InputSignalConfig* BSM_Signals)
