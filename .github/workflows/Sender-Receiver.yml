@@ -1,1 +1,19 @@
 
+
+name: Receiver-Build and Run
+
+on: [push, pull_request]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+        
+    - name: build for Sender_Receiver
+      run: g++ -Wall -Wextra -o production ./Receiver/main.c ./Receiver/BSM_SignalReceiver.c
+      
+    - name: production code run
+      run: ./production
