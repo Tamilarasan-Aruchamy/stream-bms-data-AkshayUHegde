@@ -16,9 +16,9 @@ class Assert {
 
 void Assert :: AssertOutput(int Index,MinMaxAvg* Expected_MinMaxAvg)
 {
-	REQUIRE(strcmp(ConsoleInputFormat[Index],"%s")==0);
+	REQUIRE(strcmp(ConsoleScanfFormat[Index],"%s")==0);
 	
-	REQUIRE(strcmp(ConsoleOutputFormat[Index],"ChargeRateMin:%0.2f ChargeRateMax:%0.2f ChargeRateAvg:%0.2f TempMin:%0.2f TempMax:%0.2f TempAvg:%0.2f\n")==0);
+	REQUIRE(strcmp(ConsolePrintfFormat[Index],"ChargeRateMin:%0.2f ChargeRateMax:%0.2f ChargeRateAvg:%0.2f TempMin:%0.2f TempMax:%0.2f TempAvg:%0.2f\n")==0);
 
 	REQUIRE(ConsoleOutputChargeRateMin[Index]==Expected_MinMaxAvg[0].MinValue);
 	REQUIRE(ConsoleOutputChargeRateMax[Index]==Expected_MinMaxAvg[0].MaxValue);
@@ -126,7 +126,7 @@ TEST_CASE("Test the wrong Input Message")
 	REQUIRE(scanf_Func_CallCount==15);
 	for(int i=0;i<15;i++)
 	{
-	REQUIRE(strcmp(ConsoleInputFormat[i],"%s")==0);
+	REQUIRE(strcmp(ConsoleScanfFormat[i],"%s")==0);
 	}
 	for(int i=0;i<8;i++)
 	{
