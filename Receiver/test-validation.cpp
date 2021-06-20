@@ -95,7 +95,8 @@ TEST_CASE("Test the Min Max and Avg")
 	
 	REQUIRE(ConsoleOutputChargeRateMin[i]==Expected_MinMaxAvg[i][1].MinValue);
 	REQUIRE(ConsoleOutputChargeRateMax[i]==Expected_MinMaxAvg[i][1].MaxValue);
-	//REQUIRE(abs(ConsoleOutputChargeRateMovingAvg[i]-Expected_MinMaxAvg[i][1].MovingAvg)<0.1);
+	REQUIRE(abs(ConsoleOutputChargeRateMovingAvg[i]-Expected_MinMaxAvg[i][1].MovingAvg)<0.1);
+	
 		
 			
 	}
