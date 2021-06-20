@@ -225,7 +225,7 @@ void CountNonDigit(char token,int *NonDigitCounter)
 }
 
 
-int IsValidSignalName(InputSignalConfig* BSM_Signals, char *token, int * cnt, int*InputMsgFormateError)
+int IsValidSignalName(InputSignalConfig* BSM_Signals, char *token, int * cnt, int *InputMsgFormateError)
 {
       
     
