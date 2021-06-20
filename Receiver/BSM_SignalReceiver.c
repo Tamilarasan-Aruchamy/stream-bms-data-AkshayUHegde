@@ -2,12 +2,12 @@
 
 #include "SignalReceiver.h"
 #include <string.h>
+#include <stdlib.h>
 
 #ifdef UNIT_TEST   	// include when building the Test code
 	#include "BMS_ReceiverTestDoublesHeader.h"   
 #else			// include when building the Production code
 	#include <stdio.h>
-	#include <stdlib.h>
 #endif
 
 /********************************************** Function/Variable Declarations **********************************************/ 
