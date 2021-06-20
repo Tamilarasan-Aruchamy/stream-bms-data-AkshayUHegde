@@ -34,9 +34,8 @@ TEST_CASE("Test the Number scanf function calls")
 	}
 	
 	REQUIRE(BSM_SignalReceiver()==0);
-	REQUIRE(scanf_Func_CallCount==15);
+	REQUIRE(scanf_Func_CallCount==14);
 	REQUIRE(printf_Func_CallCount==15);
-	
-	REQUIRE(ConsoleOutputTemperatureMin[3]==10.69);
+	REQUIRE(ConsoleOutputTemperatureMin[1]==10.69);
 }
 
