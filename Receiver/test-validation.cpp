@@ -96,8 +96,70 @@ TEST_CASE("Test the Min Max and Avg")
 	REQUIRE(ConsoleOutputChargeRateMin[i]==Expected_MinMaxAvg[i][1].MinValue);
 	REQUIRE(ConsoleOutputChargeRateMax[i]==Expected_MinMaxAvg[i][1].MaxValue);
 	REQUIRE(abs(ConsoleOutputChargeRateMovingAvg[i]-Expected_MinMaxAvg[i][1].MovingAvg)<0.1);
-	
 		
-			
 	}
+	
+	
+	
+TEST_CASE("Test the wrong Input Message") 
+{
+	ResetTestInterface();
+	
+	char BSM_InputMessage[15][100]={"{\"charge_rate\": 8.69, \"temp_in_c\": 15.26}",\
+                                    "{\"charge_ratee\": 1.69, \"temp_in_c\": 16.26}",\
+                                    "{\"charge_rate\": 2.69, \"temp_in_ca\": 121.26}",\
+                                    "{\"charge_rate\": 3.69, \"temp_in_c\": 18.26}",\
+                                    "{\"charge_rate\": 4.69, \"temp_in_c\": 19.26}",\
+                                    "{\"charge_rate\": 5.69, \"temp_in_c\": 110.26}",\
+                                    "{\"charge_rate\": 6..69, \"temp_in_c\": 111.26}",\
+                                    "{\"charge_rate\": 7.69, \"temp_in_c\": 112.26}",\
+                                    "{\"charge_rate\": 8.69, \"temp_in_c\": 113.26}",\
+                                    "{\"charge_rate\": 9.69, \"temp_in_c\": b114.26}",\
+                                    "{\"charge_rate\": 10.69, \"temp_in_c\": 115.26}",\
+                                    "{\"charge_rate\": 11.69, \"temp_in_c\": 116.26}",\
+                                    "{\"charge_rate\": 12.69, \"temp_in_c\": 117.26}",\
+                                    "{\"charge_rate\": 13.69, \"temp_in_c\": 118.26}",\
+                                    "{\"charge_rate\": 14.69, \"temp_in_c\": 119.26}"};
+	
+	
+	MinMaxAvg Expected_MinMaxAvg[11][2]={{{8.69,8.69,1.738000},{15.26,15.26,3.052000}},\
+						{{3.69,8.69,2.476000},{15.26,18.26,6.704000}},\
+					       {{3.69,8.69,3.414000},{15.26,19.26,10.556000}},\
+					       {{3.69,8.69,4.552000},{15.26,110.26,32.608002}},\
+					       {{3.69,8.69,6.090000},{15.26,112.26,55.060005}},\
+					       {{3.69,8.69,6.090000},{15.26,113.26,74.660004}},\
+					       {{3.69,11.69,7.490000},{15.26,115.26,94.060005}},\
+					       {{3.69,12.69,8.890000},{15.26,116.26,113.459999}},\
+					       {{3.69,13.69,10.290000},{15.26,117.26,114.860001}},\
+					       {{3.69,14.69,11.490000},{15.26,118.26,116.059998}},\
+					       {{3.69,15.69,12.690001},{15.26,119.26,117.259995}}};
+	
+	for(int i=0;i<15;i++)
+	{
+	strcpy(InputMessageBuf[i],BSM_InputMessage[i]);
+	}
+	
+	REQUIRE(BSM_SignalReceiver()==1);
+	REQUIRE(scanf_Func_CallCount==15);
+	
+	REQUIRE(printf_Func_CallCount==11);
+	
+	for(int i=0;i<15;i++)
+	{
+	REQUIRE(strcmp(ConsoleInputFormat[i],"%s")==0);
+	}
+	
+	for(int i=0;i<11;i++)
+	{
+
+	REQUIRE(strcmp(ConsoleOutputFormat[i],"TempMin:%0.2f TempMax:%0.2f TempAvg:%0.2f ChargeRateMin:%0.2f ChargeRateMax:%0.2f ChargeRateAvg:%0.2f\n")==0);
+	REQUIRE(ConsoleOutputTemperatureMin[i]==Expected_MinMaxAvg[i][0].MinValue);
+	REQUIRE(ConsoleOutputTemperatureMax[i]==Expected_MinMaxAvg[i][0].MaxValue);
+	REQUIRE(abs(ConsoleOutputTemperatureMovingAvg[i]-Expected_MinMaxAvg[i][0].MovingAvg)<0.1);
+	
+	REQUIRE(ConsoleOutputChargeRateMin[i]==Expected_MinMaxAvg[i][1].MinValue);
+	REQUIRE(ConsoleOutputChargeRateMax[i]==Expected_MinMaxAvg[i][1].MaxValue);
+	REQUIRE(abs(ConsoleOutputChargeRateMovingAvg[i]-Expected_MinMaxAvg[i][1].MovingAvg)<0.1);
+		
+	}	
 }
