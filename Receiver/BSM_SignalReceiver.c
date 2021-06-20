@@ -53,7 +53,7 @@ int BSM_SignalReceiver()
                 Temp.MovingAvg = movingAvg(arrNumbers[0], &sum[0], pos, len, InputData[0].SignalValue);
                 ChargeRate.MovingAvg = movingAvg(arrNumbers[1], &sum[1], pos, len, InputData[1].SignalValue);
                 pos++;
-                if (pos >= sizeof(arrNumbers) / sizeof(int)){
+                if (pos >= 5){
                     pos = 0;
                     }
                
