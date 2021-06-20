@@ -122,16 +122,16 @@ int delimit(char str[100],InputSignalConfig* BSM_Signals) {
    //char str[190] = "{\"charge_rate\": 8.69, \"temp_in_c\": 5.26}";
 
    
-   bool InputMsgFormateError=false;
+   bool InputMsgFormateError=0;
 
    if(str[0] != '{')
    {
-       InputMsgFormateError=true;
+       InputMsgFormateError=1;
    }
    
    else if(str[strlen(str)-1] != '}')
    {
-       InputMsgFormateError=true;
+       InputMsgFormateError=1;
    }
     
    else
@@ -146,7 +146,7 @@ int Split(char str[100],InputSignalConfig* BSM_Signals)
 {
        const char s[6] = "{: ,}";
        char *token;
-       bool InputMsgFormateError=false;
+       bool InputMsgFormateError=0;
        int cnt=0,NonDigitCounter=0,DotCounter=0;
            /* get the first token */
         token = strtok(str, s);
@@ -170,7 +170,7 @@ int Split(char str[100],InputSignalConfig* BSM_Signals)
         }
         else 
         {
-            InputMsgFormateError=true;
+            InputMsgFormateError=1;
 
         }
          cnt++;
@@ -192,7 +192,7 @@ for(int itr=0;itr<strlen(token);itr++)
 }
                 if(DotCounter>1 || NonDigitCounter>0)
                 { 
-                    *InputMsgFormateError=true;
+                    *InputMsgFormateError=1;
 
                 }
             
@@ -231,7 +231,7 @@ int IsValidSignalName(InputSignalConfig* BSM_Signals, char *token, int * cnt, in
     
             if(strcmp(InputSignalName[*cnt/2],token))
                 {
-                   *InputMsgFormateError=true;
+                   *InputMsgFormateError=1;
                 }
                 
                 BSM_Signals[*cnt/2].SignalName=token;
