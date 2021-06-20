@@ -31,7 +31,7 @@ int BSM_SignalReceiver()
                                     
     InputSignalConfig InputData[2]={{NULL,32767},{NULL,32767}};
     int returnval,mainreturnval=0;
-    MinMaxAvg Temp={32767,-32767,0},ChargeRate={32767,-32767,0};
+    MinMaxAvg ChargeRate={32767,-32767,0},Temp={32767,-32767,0};
     
     float arrNumbers[2][5] = {0};
 
@@ -47,18 +47,21 @@ int BSM_SignalReceiver()
 		
 		if(!returnval)
 		{
-                Calculate_MinMax(InputData[0].SignalValue, &Temp);
-                Calculate_MinMax(InputData[1].SignalValue, &ChargeRate);
-
-                Temp.MovingAvg = movingAvg(arrNumbers[0], &sum[0], pos, len, InputData[0].SignalValue);
-                ChargeRate.MovingAvg = movingAvg(arrNumbers[1], &sum[1], pos, len, InputData[1].SignalValue);
+		
+		Calculate_MinMax(InputData[0].SignalValue, &ChargeRate);
+                Calculate_MinMax(InputData[1].SignalValue, &Temp);
+                
+		
+		ChargeRate.MovingAvg = movingAvg(arrNumbers[0], &sum[0], pos, len, InputData[0].SignalValue);
+                Temp.MovingAvg = movingAvg(arrNumbers[1], &sum[1], pos, len, InputData[1].SignalValue);
+                
                 pos++;
                 if (pos >= 5){
                     pos = 0;
                     }
                
                
-              printf("TempMin:%0.2f TempMax:%0.2f TempAvg:%0.2f ChargeRateMin:%0.2f ChargeRateMax:%0.2f ChargeRateAvg:%0.2f\n", Temp.MinValue,Temp.MaxValue,Temp.MovingAvg,ChargeRate.MinValue,ChargeRate.MaxValue,ChargeRate.MovingAvg);
+              printf("ChargeRateMin:%0.2f ChargeRateMax:%0.2f ChargeRateAvg:%0.2f TempMin:%0.2f TempMax:%0.2f TempAvg:%0.2f\n", ChargeRate.MinValue,ChargeRate.MaxValue,ChargeRate.MovingAvg,Temp.MinValue,Temp.MaxValue,Temp.MovingAvg);
                mainreturnval=1;
             }
 	}
@@ -93,7 +96,7 @@ float movingAvg(float *ptrArrNumbers, float *ptrSum, int pos, int len, float nex
 
 
 int delimit(char str[100],InputSignalConfig* BSM_Signals) {
-   //char str[190] = "{\"charge_rate\": 8.69, \"temp_in_c\": 5.26}";
+  
 
    
    int InputMsgFormateError=0;
