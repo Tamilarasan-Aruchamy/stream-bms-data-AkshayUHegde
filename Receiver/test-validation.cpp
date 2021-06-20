@@ -8,7 +8,7 @@
 
 extern int BSM_SignalReceiver();
 
-AssertOutput(int MessageIndex, MinMaxAvg Expected_MinMaxAvg[2])
+AssertOutput(int i, MinMaxAvg Expected_MinMaxAvg[2])
 {
 	REQUIRE(strcmp(ConsoleInputFormat[i],"%s")==0);
 	
