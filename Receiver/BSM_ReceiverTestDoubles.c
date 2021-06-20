@@ -29,8 +29,8 @@ int ResetTestInterface()
 {
 	printf_Func_CallCount=0;   // Resetting the Global variable
 	scanf_Func_CallCount=0;  // Resetting the Global variable
-	int ResetScanfMsgIndex=1;  // Resetting the static variable to avoid the array index over flow error
-	int ResetPrintfMsgIndex=1; // Resetting the static variable to avoid the array index over flow error
+	ResetScanfMsgIndex=1;  // Resetting the static variable to avoid the array index over flow error
+	ResetPrintfMsgIndex=1; // Resetting the static variable to avoid the array index over flow error
 	return 0;
 }
 
