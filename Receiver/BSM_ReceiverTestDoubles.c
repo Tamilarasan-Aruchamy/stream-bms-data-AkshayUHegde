@@ -9,7 +9,7 @@ int scanf(char *format, char * InputBuffer);
 int printf(char *format, float ChargeRate_MinValue, float ChargeRate_MaxValue, float ChargeRate_MovingAvg, float Temp_MinValue, float Temp_MaxValue, float Temp_MovingAvg);
 
 char InputMessageBuf[15][100];
-char ConsoleScanfFormat[15][5];
+char ConsoleScanfFormat[15][15];
 char ConsolePrintfFormat[15][200];
 float	ConsoleOutputChargeRateMin[15];
 float	ConsoleOutputChargeRateMax[15];
