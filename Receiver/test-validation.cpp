@@ -29,7 +29,9 @@ TEST_CASE("Test the Number scanf function calls")
                                     "{\"charge_rate\": 22.69, \"temp_in_c\": 19.26}"};
 	
 	for(int i=0;i<15;i++)
+	{
 	strcpy(InputMessageBuf[i],BSM_InputMessage[i]);
+	}
 	
 	REQUIRE(BSM_SignalReceiver()==0);
 	REQUIRE(scanf_Func_CallCount==15);
