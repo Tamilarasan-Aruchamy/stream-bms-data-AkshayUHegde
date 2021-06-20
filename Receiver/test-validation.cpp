@@ -63,7 +63,7 @@ TEST_CASE("Test the Func Call,Min, Max and Avg")
 	
 	for(int itr=0;itr<15;itr++)
 		{
-		 Output.AssertOutput(itr, Expected_MinMaxAvg[i]);	 // Validate all parameters
+		 Output.AssertOutput(itr, Expected_MinMaxAvg[itr]);	 // Validate all parameters
 		}
 	
 	
