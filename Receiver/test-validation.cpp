@@ -110,7 +110,7 @@ TEST_CASE("Test the wrong Input Message")
 	
 	for(int i=0;i<15;i++)
 		{
-		  REQUIRE(strcmp(ConsoleScanfFormat[i],"%s")==0);
+		  REQUIRE(strcmp(ConsoleScanfFormat[i],"%[^\n]%*c")==0);
 		}
 	
 	for(int itr=0;itr<8;itr++)
@@ -123,7 +123,7 @@ TEST_CASE("Test the wrong Input Message")
 
 void Assert :: AssertOutput(int Index,MinMaxAvg* Expected_MinMaxAvg)
 {
-	REQUIRE(strcmp(ConsoleScanfFormat[Index],"%s")==0);
+	REQUIRE(strcmp(ConsoleScanfFormat[Index],"%[^\n]%*c")==0);
 	
 	REQUIRE(strcmp(ConsolePrintfFormat[Index],"ChargeRateMin:%0.2f ChargeRateMax:%0.2f ChargeRateAvg:%0.2f TempMin:%0.2f TempMax:%0.2f TempAvg:%0.2f\n")==0);
 
