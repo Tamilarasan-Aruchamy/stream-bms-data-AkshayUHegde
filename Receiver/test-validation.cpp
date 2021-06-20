@@ -71,7 +71,7 @@ TEST_CASE("Test the Func Call,Min, Max and Avg")
 	strcpy(InputMessageBuf[i],BSM_InputMessage_TestData_1[i]);
 	}
 	
-	REQUIRE(BSM_SignalReceiver()==1);
+	REQUIRE(BSM_SignalReceiver()==0);
 
 	REQUIRE(scanf_Func_CallCount==15);
 	REQUIRE(printf_Func_CallCount==15);
@@ -121,7 +121,7 @@ TEST_CASE("Test the wrong Input Message")
 	{
 	strcpy(InputMessageBuf[i],BSM_InputMessage_TestData_2[i]);
 	}
-	REQUIRE(BSM_SignalReceiver()==1);
+	REQUIRE(BSM_SignalReceiver()==0);
 	REQUIRE(printf_Func_CallCount==8);
 	REQUIRE(scanf_Func_CallCount==15);
 	for(int i=0;i<15;i++)
