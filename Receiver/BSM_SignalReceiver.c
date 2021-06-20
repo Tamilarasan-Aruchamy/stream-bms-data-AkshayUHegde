@@ -30,40 +30,35 @@ int BSM_SignalReceiver()
     char BSM_InputMessage[100];
                                     
     InputSignalConfig InputData[2]={{NULL,32767},{NULL,32767}};
-    int returnval=1;
+    int FormatErrorDetected=1;
     MinMaxAvg ChargeRate={32767,-32767,0},Temp={32767,-32767,0};
     
-    float arrNumbers[2][5] = {0};
-
-  int pos = 0;
-  float sum[2] = {0};
-  int len=5;
+    float MovAvg_ArrNumbers[2][5] = {0};   // Store the last 5 input records to MovingAvg.
+    int pos = 0;
+    float sum[2] = {0};
+    int MovAvg_len=5;  // Number of last records to calculate MovingAvg.
 
     for(int i=0; i<15 ; i++)
-	{
+	{	
+		scanf("%s",BSM_InputMessageBuf);  // Read from Console Buffer
+		FormatErrorDetected=delimit(BSM_InputMessageBuf,InputData);
 		
-		scanf("%s",BSM_InputMessage);
-		returnval=delimit(BSM_InputMessage,InputData);
-		
-		if(!returnval)
+		if(!FormatErrorDetected)
 		{
 		
-		Calculate_MinMax(InputData[0].SignalValue, &ChargeRate);
-                Calculate_MinMax(InputData[1].SignalValue, &Temp);
+		Calculate_MinMax(InputData[0].SignalValue, &ChargeRate); // Calculate Min & Max for ChargeRate Signal
+                Calculate_MinMax(InputData[1].SignalValue, &Temp); // Calculate Min & Max for Temperature Signal
                 
-		
-		ChargeRate.MovingAvg = movingAvg(arrNumbers[0], &sum[0], pos, len, InputData[0].SignalValue);
-                Temp.MovingAvg = movingAvg(arrNumbers[1], &sum[1], pos, len, InputData[1].SignalValue);
+		ChargeRate.MovingAvg = movingAvg(arrNumbers[0], &sum[0], pos, len, InputData[0].SignalValue);  // Calculate MovAvg for ChargeRate Signal
+                Temp.MovingAvg = movingAvg(arrNumbers[1], &sum[1], pos, len, InputData[1].SignalValue); // Calculate MovAvg for Temperature Signal
                 
-                pos++;
+                printf("ChargeRateMin:%0.2f ChargeRateMax:%0.2f ChargeRateAvg:%0.2f TempMin:%0.2f TempMax:%0.2f TempAvg:%0.2f\n", ChargeRate.MinValue,ChargeRate.MaxValue,ChargeRate.MovingAvg,Temp.MinValue,Temp.MaxValue,Temp.MovingAvg);
+    		
+		pos++;
                 if (pos >= 5){
                     pos = 0;
                     }
-               
-               
-              printf("ChargeRateMin:%0.2f ChargeRateMax:%0.2f ChargeRateAvg:%0.2f TempMin:%0.2f TempMax:%0.2f TempAvg:%0.2f\n", ChargeRate.MinValue,ChargeRate.MaxValue,ChargeRate.MovingAvg,Temp.MinValue,Temp.MaxValue,Temp.MovingAvg);
-    
-            }
+            	}
 	}
     
     return 0;
