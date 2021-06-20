@@ -28,7 +28,8 @@ TEST_CASE("Test the Number scanf function calls")
                                     "{\"charge_rate\": 21.69, \"temp_in_c\": 18.26}",\
                                     "{\"charge_rate\": 22.69, \"temp_in_c\": 19.26}"};
 	
-	InputMessageBuf=BSM_InputMessage;
+	for(int i=0;i<15;i++)
+	InputMessageBuf[i]=BSM_InputMessage[i];
 	
 	REQUIRE(BSM_SignalReceiver()==0);
 	REQUIRE(printf_Func_CallCount==15);
