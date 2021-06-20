@@ -41,7 +41,7 @@ void Assert :: AssertOutput(int Index,MinMaxAvg Expected_MinMaxAvg[2])
 TEST_CASE("Test the Func Call,Min, Max and Avg") 
 {
 	ResetTestInterface();
-	//Assert Output;
+	Assert Output;
 	char BSM_InputMessage_TestData_1[15][100]={"{\"charge_rate\": 18.69, \"temp_in_c\": 5.26}",\
                                     "{\"charge_rate\": 9.69, \"temp_in_c\": 6.26}",\
                                     "{\"charge_rate\": 10.69, \"temp_in_c\": 21.26}",\
