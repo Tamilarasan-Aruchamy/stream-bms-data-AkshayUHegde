@@ -1,7 +1,7 @@
 extern char InputMessageBuf[15][100];
-extern char* ConsoleInputFormat[15];
-extern char* ConsoleInputValue[15];
-extern char* ConsoleOutputFormat[15];
+extern char* ConsoleInputFormat[15][5];
+extern char* ConsoleInputValue[15][100];
+extern char* ConsoleOutputFormat[15][200];
 extern float	ConsoleOutputTemperatureMin[15];
 extern float	ConsoleOutputTemperatureMax[15];
 extern float	ConsoleOutputTemperatureMovingAvg[15];
