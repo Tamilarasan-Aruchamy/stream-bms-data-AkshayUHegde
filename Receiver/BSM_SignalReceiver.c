@@ -2,11 +2,15 @@
 
 #include "SignalReceiver.h"
 #include <string.h>
-#include <stdio.h>
 #include <stdbool.h>
-#include <stdlib.h>
 #include <ctype.h>
 
+#ifdef UNIT_TEST   	// include when building the Test code
+	#include "BMS_TestDoublesHeader.h"   
+#else			// include when building the Production code
+	#include <stdio.h>
+	#include <stdlib.h>
+#endif
 
 /********************************************** Function/Variable Declarations **********************************************/ 
 
@@ -25,21 +29,7 @@ int IsValidSignalName(InputSignalConfig* BSM_Signals, char *token, int * cnt, in
 /*************************************************** function Definitions **************************************************/ 
 int BSM_SignalReceiver()
 {
-    char BSM_InputMessage[15][100]={"{\"charge_rate\": 18.69, \"temp_in_c\": 5.26}",\
-                                    "{\"charge_rate\": j9.69, \"temp_in_c\": 6.26}",\
-                                    "{\"charge_rate\": 10.69, \"temp_in_c\": 7.26}",\
-                                    "{\"charge_rate\": 199.69, \"temp_in_c\": 8.26}",\
-                                    "{\"charge_rate\": 12.69, \"temp_in_c\": 9.26}",\
-                                    "{\"charge_rate\": 13.69, \"temp_in_c\": 10.26}",\
-                                    "{\"charge_rate\": 14.69, \"temp_in_c\": 11.26}",\
-                                    "{\"charge_rate\": 15.69, \"temp_in_c\": 12.26}",\
-                                    "{\"charge_rate\": 16.69, \"temp_in_c\": 13.26}",\
-                                    "{\"charge_rate\": 17.69, \"temp_in_c\": 14.26}",\
-                                    "{\"charge_rate\": 18.69, \"temp_in_c\": 15.26}",\
-                                    "{\"charge_rate\": 19.69, \"temp_in_c\": 16.26}",\
-                                    "{\"charge_rate\": 20.69, \"temp_in_c\": 17.26}",\
-                                    "{\"charge_rate\": 21.69, \"temp_in_c\": 18.26}",\
-                                    "{\"charge_rate\": 22.69, \"temp_in_c\": 19.26}"};
+    char BSM_InputMessage[100];
                                     
     InputSignalConfig InputData[2]={{NULL,32767},{NULL,32767}};
     int returnval;
@@ -54,8 +44,8 @@ int BSM_SignalReceiver()
     for(int i=0; i<5 ; i++)
 	{
 		
-	//	scanf("%s",BSM_InputMessage);
-		returnval=delimit(BSM_InputMessage[i],InputData);
+		scanf("%s",BSM_InputMessage);
+		returnval=delimit(BSM_InputMessage,InputData);
 		
 		if(!returnval)
 		  //  {
