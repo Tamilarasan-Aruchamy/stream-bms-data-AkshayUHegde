@@ -41,7 +41,7 @@ void Assert :: AssertOutput(int i)
 TEST_CASE("Test the Func Call,Min, Max and Avg") 
 {
 	ResetTestInterface();
-	Assert Output;
+	//Assert Output;
 	char BSM_InputMessage_TestData_1[15][100]={"{\"charge_rate\": 18.69, \"temp_in_c\": 5.26}",\
                                     "{\"charge_rate\": 9.69, \"temp_in_c\": 6.26}",\
                                     "{\"charge_rate\": 10.69, \"temp_in_c\": 21.26}",\
@@ -89,7 +89,7 @@ TEST_CASE("Test the Func Call,Min, Max and Avg")
 	
 	for(int i=0;i<15;i++)
 	{
-		Output.AssertOutput(i);
+		Assert.AssertOutput(i);
 	//AssertOutput(i,	Expected_MinMaxAvg[i]);	
 		
 	/*REQUIRE(strcmp(ConsoleInputFormat[i],"%s")==0);
@@ -110,7 +110,7 @@ TEST_CASE("Test the Func Call,Min, Max and Avg")
 TEST_CASE("Test the wrong Input Message") 
 {
 	ResetTestInterface();
-	Assert Output;
+	//Assert Output;
 	char BSM_InputMessage_TestData_2[15][100]={"{\"charge_rate\": 8.69, \"temp_in_c\": 15.26}",\
                                     "{\"charge_ratee\": 1.69, \"temp_in_c\": 16.26}",\
                                     "{\"charge_rate\": 2.69, \"temp_in_ca\": 121.26}",\
@@ -150,7 +150,7 @@ TEST_CASE("Test the wrong Input Message")
 	}
 	for(int i=0;i<8;i++)
 	{
-		Output.AssertOutput(i);
+		Assert.AssertOutput(i);
 		//AssertOutput(i,	Expected_MinMaxAvg[i]);	
 		
 /*	REQUIRE(strcmp(ConsoleOutputFormat[i],"TempMin:%0.2f TempMax:%0.2f TempAvg:%0.2f ChargeRateMin:%0.2f ChargeRateMax:%0.2f ChargeRateAvg:%0.2f\n")==0);
