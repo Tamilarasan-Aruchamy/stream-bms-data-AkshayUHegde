@@ -37,7 +37,7 @@ TEST_CASE("Test the Number scanf function calls")
 	REQUIRE(scanf_Func_CallCount==15);
 }
 
-TEST_CASE("Test the Number scanf function calls") 
+TEST_CASE("Test the Min Max and Avg") 
 {
 	ResetTestInterface();
 	
