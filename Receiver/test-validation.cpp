@@ -5,11 +5,20 @@
 #include "BMS_ReceiverTestDoublesHeader.h"
 #include <string.h>
 #include <stdlib.h>
-using namespace std;
+
+
+
 
 extern int BSM_SignalReceiver();
+
+class Assert {
+
+  public:
+    void AssertOutput(int i);
+};
+
 //AssertOutput(int i, MinMaxAvg Expected_MinMaxAvg[2]);
-AssertOutput(int i);
+//AssertOutput(int i);
 
 TEST_CASE("Test the Func Call,Min, Max and Avg") 
 {
@@ -60,7 +69,7 @@ TEST_CASE("Test the Func Call,Min, Max and Avg")
 	
 	for(int i=0;i<15;i++)
 	{
-		AssertOutput(i);
+		Assert.AssertOutput(i);
 	//AssertOutput(i,	Expected_MinMaxAvg[i]);	
 		
 	/*REQUIRE(strcmp(ConsoleInputFormat[i],"%s")==0);
@@ -136,7 +145,7 @@ TEST_CASE("Test the wrong Input Message")
 }
 
 //AssertOutput(int i, MinMaxAvg Expected_MinMaxAvg[2])
-AssertOutput(int i)
+void AssertOutput(int i)
 {
 	/*REQUIRE(strcmp(ConsoleInputFormat[i],"%s")==0);
 	
