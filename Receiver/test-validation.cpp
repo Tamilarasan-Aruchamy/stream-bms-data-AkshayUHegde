@@ -3,7 +3,6 @@
 #include "../test/catch.hpp"
 #include "SignalReceiver.h"
 #include "BMS_ReceiverTestDoublesHeader.h"
-#include<stddef.h>
 #include<string.h>
 
 extern int BSM_SignalReceiver();
