@@ -18,14 +18,15 @@ void Assert :: AssertOutput(int Index,MinMaxAvg* Expected_MinMaxAvg)
 {
 	REQUIRE(strcmp(ConsoleInputFormat[Index],"%s")==0);
 	
-	REQUIRE(strcmp(ConsoleOutputFormat[Index],"TempMin:%0.2f TempMax:%0.2f TempAvg:%0.2f ChargeRateMin:%0.2f ChargeRateMax:%0.2f ChargeRateAvg:%0.2f\n")==0);
-	REQUIRE(ConsoleOutputTemperatureMin[Index]==Expected_MinMaxAvg[0].MinValue);
-	REQUIRE(ConsoleOutputTemperatureMax[Index]==Expected_MinMaxAvg[0].MaxValue);
-	REQUIRE(abs(ConsoleOutputTemperatureMovingAvg[Index]-Expected_MinMaxAvg[0].MovingAvg)<0.1);
+	REQUIRE(strcmp(ConsoleOutputFormat[Index],"ChargeRateMin:%0.2f ChargeRateMax:%0.2f ChargeRateAvg:%0.2f TempMin:%0.2f TempMax:%0.2f TempAvg:%0.2f\n")==0);
+
+	REQUIRE(ConsoleOutputChargeRateMin[Index]==Expected_MinMaxAvg[0].MinValue);
+	REQUIRE(ConsoleOutputChargeRateMax[Index]==Expected_MinMaxAvg[0].MaxValue);
+	REQUIRE(abs(ConsoleOutputChargeRateMovingAvg[Index]-Expected_MinMaxAvg[0].MovingAvg)<0.1);
 	
-	REQUIRE(ConsoleOutputChargeRateMin[Index]==Expected_MinMaxAvg[1].MinValue);
-	REQUIRE(ConsoleOutputChargeRateMax[Index]==Expected_MinMaxAvg[1].MaxValue);
-	REQUIRE(abs(ConsoleOutputChargeRateMovingAvg[Index]-Expected_MinMaxAvg[1].MovingAvg)<0.1);
+	REQUIRE(ConsoleOutputTemperatureMin[Index]==Expected_MinMaxAvg[1].MinValue);
+	REQUIRE(ConsoleOutputTemperatureMax[Index]==Expected_MinMaxAvg[1].MaxValue);
+	REQUIRE(abs(ConsoleOutputTemperatureMovingAvg[Index]-Expected_MinMaxAvg[1].MovingAvg)<0.1);
 }
 
 TEST_CASE("Test the Func Call,Min, Max and Avg") 
