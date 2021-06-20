@@ -140,7 +140,7 @@ TEST_CASE("Test the wrong Input Message")
 	REQUIRE(BSM_SignalReceiver()==1);
 	REQUIRE(scanf_Func_CallCount==15);
 	
-	REQUIRE(printf_Func_CallCount==11);
+	REQUIRE(printf_Func_CallCount==8);
 	
 	for(int i=0;i<15;i++)
 	{
