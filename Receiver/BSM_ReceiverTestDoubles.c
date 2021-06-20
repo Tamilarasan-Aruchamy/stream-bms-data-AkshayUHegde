@@ -9,8 +9,8 @@ int scanf(char *format, char * InputBuffer);
 int printf(char *format, float ChargeRate_MinValue, float ChargeRate_MaxValue, float ChargeRate_MovingAvg, float Temp_MinValue, float Temp_MaxValue, float Temp_MovingAvg);
 
 char InputMessageBuf[15][100];
-char ConsoleInputFormat[15][5];
-char ConsoleOutputFormat[15][200];
+char ConsoleScanfFormat[15][5];
+char ConsolePrintfFormat[15][200];
 float	ConsoleOutputChargeRateMin[15];
 float	ConsoleOutputChargeRateMax[15];
 float	ConsoleOutputChargeRateMovingAvg[15];
@@ -45,7 +45,7 @@ int scanf(char *format, char * InputBuffer)
 		ResetScanfMsgIndex=0;
 	}
 	
-	strcpy(ConsoleInputFormat[MsgBufIndex],format);
+	strcpy(ConsoleScanfFormat[MsgBufIndex],format);
 	strcpy(InputBuffer,InputMessageBuf[MsgBufIndex]);
 	
 	scanf_Func_CallCount++;
@@ -67,7 +67,7 @@ int printf(char *format, float ChargeRate_MinValue, float ChargeRate_MaxValue, f
 		ResetPrintfMsgIndex=0;
 	}
 		
-	strcpy(ConsoleOutputFormat[MsgIndex],format);
+	strcpy(ConsolePrintfFormat[MsgIndex],format);
 	ConsoleOutputChargeRateMin[MsgIndex]=ChargeRate_MinValue;
 	ConsoleOutputChargeRateMax[MsgIndex]=ChargeRate_MaxValue;
 	ConsoleOutputChargeRateMovingAvg[MsgIndex]=ChargeRate_MovingAvg;
