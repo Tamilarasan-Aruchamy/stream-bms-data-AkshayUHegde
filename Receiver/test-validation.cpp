@@ -53,7 +53,7 @@ TEST_CASE("Test the Func Call,Min, Max and Avg")
 	
 	REQUIRE(BSM_SignalReceiver()==1);
 	
-	REQUIRE(scanf_Func_CallCount==8);
+	REQUIRE(scanf_Func_CallCount==15);
 	REQUIRE(printf_Func_CallCount==15);
 	
 	for(int i=0;i<15;i++)
