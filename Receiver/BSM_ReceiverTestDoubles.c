@@ -9,9 +9,9 @@ int scanf(char *format, char * InputBuffer);
 int printf(char *format, float Temp_MinValue, float Temp_MaxValue, float Temp_MovingAvg, float ChargeRate_MinValue, float ChargeRate_MaxValue, float ChargeRate_MovingAvg);
 
 char InputMessageBuf[15][100];
-char* ConsoleInputFormat[15];
-char* ConsoleInputValue[15];
-char* ConsoleOutputFormat[15];
+char* ConsoleInputFormat[15][5];
+char* ConsoleInputValue[15][100];
+char* ConsoleOutputFormat[15][200];
 float	ConsoleOutputTemperatureMin[15];
 float	ConsoleOutputTemperatureMax[15];
 float	ConsoleOutputTemperatureMovingAvg[15];
