@@ -33,7 +33,7 @@ TEST_CASE("Test the Func Call,Min, Max and Avg")
                                     "{\"charge_rate\": 19.69, \"temp_in_c\": 16.26}",\
                                     "{\"charge_rate\": 20.69, \"temp_in_c\": 17.26}",\
                                     "{\"charge_rate\": 21.69, \"temp_in_c\": 18.26}",\
-                                    "{\"charge_rate\": 22.69, \"temp_in_c\": 19.26}"};
+                                    "{\"charge_rate\": -22.69, \"temp_in_c\": 19.26}"};
 	
 					/* charge_rate {Min,Max and Avg}  Temp  {Min,Max and Avg} */
 	MinMaxAvg Expected_MinMaxAvg[15][2]={{{18.69,18.69,3.738000},{5.26,5.26,1.052000}},\
@@ -50,7 +50,7 @@ TEST_CASE("Test the Func Call,Min, Max and Avg")
 					       {{9.69,30.69,17.690001},{5.26,21.26,14.260000}},\
 					       {{9.69,30.69,18.690001},{5.26,21.26,15.260000}},\
 					       {{9.69,30.69,19.690001},{5.26,21.26,16.260000}},\
-					       {{9.69,30.69,11.614000},{5.26,21.26,17.208000}}};
+					       {{-22.69,30.69,11.614000},{5.26,21.26,17.208000}}};
 	
 	for(int i=0;i<15;i++)
 		{
