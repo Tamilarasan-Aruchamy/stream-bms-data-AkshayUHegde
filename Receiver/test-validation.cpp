@@ -5,6 +5,7 @@
 #include "BMS_ReceiverTestDoublesHeader.h"
 #include <string.h>
 #include <stdlib.h>
+using namespace std;
 
 extern int BSM_SignalReceiver();
 //AssertOutput(int i, MinMaxAvg Expected_MinMaxAvg[2]);
