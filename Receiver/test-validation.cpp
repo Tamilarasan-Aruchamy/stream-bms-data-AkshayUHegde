@@ -14,12 +14,12 @@ extern int BSM_SignalReceiver();
 class Assert {
 
   public:
-    void AssertOutput(int,MinMaxAvg);
+    void AssertOutput(int,MinMaxAvg*);
 };
 
 
 //AssertOutput(int i, MinMaxAvg Expected_MinMaxAvg[2])
-void Assert :: AssertOutput(int Index,MinMaxAvg Expected_MinMaxAvg[2])
+void Assert :: AssertOutput(int Index,MinMaxAvg* Expected_MinMaxAvg)
 {
 	REQUIRE(strcmp(ConsoleInputFormat[Index],"%s")==0);
 	
