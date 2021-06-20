@@ -132,17 +132,17 @@ int delimitAndValidateSignals(char str[100],InputSignalConfig* BSM_Signals)
 		           }
 		
         	  else{
-		       	InputMsgFormateError=1;
+		       	FormatErrorDetected=1;
         	      }
          	
 		cnt++;
 		token = strtok(NULL, s);
    		}
 	
-	return InputMsgFormateError;
+	return FormatErrorDetected;
 }
 
-int IsValidSignalValue(InputSignalConfig* BSM_Signals, char *token, int * cnt, int *InputMsgFormateError)
+int IsValidSignalValue(InputSignalConfig* BSM_Signals, char *token, int * cnt, int *FormatErrorDetected)
 {
     	int NonDigitCounter=0,DotCounter=0;
    
@@ -183,7 +183,7 @@ int CountNonDigit(char token,int *NonDigitCounter)
 
 
 
-int IsValidSignalName(InputSignalConfig* BSM_Signals, char *token, int * cnt, int *InputMsgFormateError)
+int IsValidSignalName(InputSignalConfig* BSM_Signals, char *token, int * cnt, int *FormatErrorDetected)
 {
 	if(strcmp(InputSignalName[*cnt/2],token))  //Check Input Signal name and format is Correct.
 		{
