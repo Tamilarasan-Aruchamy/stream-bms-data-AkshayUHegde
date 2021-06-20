@@ -49,7 +49,7 @@ int BSM_SignalReceiver()
 
   int pos = 0;
   float sum[2] = {0};
-  int len=0;
+  int len=5;
 
     for(int i=0; i<5 ; i++)
 	{
@@ -73,10 +73,10 @@ int BSM_SignalReceiver()
                 Calculate_MinMax(InputData[1].SignalValue, &ChargeRate);
 
                
-               if(len<5)
-                    {
-                    len++;
-                    }
+            //   if(len<5)
+              //      {
+             //       len++;
+             //       }
                 Temp.MovingAvg = movingAvg(arrNumbers[0], &sum[0], pos, len, InputData[0].SignalValue);
                // printf("%f\n", sum[0]);
                 ChargeRate.MovingAvg = movingAvg(arrNumbers[1], &sum[1], pos, len, InputData[1].SignalValue);
