@@ -77,7 +77,7 @@ int BSM_SignalReceiver()
             }
 	}
     
-    
+    return 0;
 }
 
 int Calculate_MinMax(float SignalValue,MinMaxAvg *MinMax)
