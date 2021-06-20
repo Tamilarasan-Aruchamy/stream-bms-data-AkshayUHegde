@@ -39,31 +39,17 @@ int BSM_SignalReceiver()
   float sum[2] = {0};
   int len=5;
 
-    for(int i=0; i<5 ; i++)
+    for(int i=0; i<15 ; i++)
 	{
 		
 		scanf("%s",BSM_InputMessage);
 		returnval=delimit(BSM_InputMessage,InputData);
 		
 		if(!returnval)
-		  //  {
-		 //       printf("InputMessage Invalid or InputMessage Formate Error\n");
-		  //  }
-
-       // else
-            {
-              // printf("%s\n", InputData[0].SignalName);
-              //  printf("%f\n", InputData[0].SignalValue);
-              //  printf("%s\n", InputData[1].SignalName);
-             //  printf("%f\n\n\n", InputData[1].SignalValue);
                 
                 Calculate_MinMax(InputData[0].SignalValue, &Temp);
                 Calculate_MinMax(InputData[1].SignalValue, &ChargeRate);
 
-             //  if(len<5)
-             //       {
-             //       len++;
-             //       }
                 Temp.MovingAvg = movingAvg(arrNumbers[0], &sum[0], pos, len, InputData[0].SignalValue);
                 ChargeRate.MovingAvg = movingAvg(arrNumbers[1], &sum[1], pos, len, InputData[1].SignalValue);
                 pos++;
