@@ -1,15 +1,14 @@
 /******************************************************* Header_Files *******************************************************/ 
 
 #include "SignalReceiver.h"
-#include <stddef.h>
-#include <stdio.h>
 
 /******************************************* /MacroFunction/Variable Declarations *******************************************/ 
 
-int scanf(const char *format, char * InputBuffer)
+int scanf(const char *format, char * InputBuffer);
 int printf(const char *format, float Temp_MinValue, float Temp_MinValue, float Temp_MovingAvg, float ChargeRate_MinValue, float ChargeRate_MinValue, float ChargeRate_MovingAvg);
 
 char InputMessageBuf[15][100];
+char* ConsoleInputFormat[5];
 char* ConsoleOutputFormat[15];
 float	ConsoleOutputTemperatureMin[15];
 float	ConsoleOutputTemperatureMax[15];
@@ -18,6 +17,9 @@ float	ConsoleOutputChargeRateMin[15];
 float	ConsoleOutputChargeRateMax[15];
 float	ConsoleOutputChargeRateMovingAvg[15];
 int printf_Func_CallCount=0;
+int scanf_Func_CallCount=0;
+int ResetScanfMsgIndex=1;
+int ResetPrintfMsgIndex=1;
 
 
 /*************************************************** function Definitions **************************************************/
@@ -25,15 +27,29 @@ int printf_Func_CallCount=0;
 int ResetTestInterface()
 {
 	printf_Func_CallCount=0;   // Resetting the Global variable
+	scanf_Func_CallCount=0;  // Resetting the Global variable
+	int ResetScanfMsgIndex=1;  // Resetting the static variable to avoid the array index over flow error
+	int ResetPrintfMsgIndex=1; // Resetting the static variable to avoid the array index over flow error
 	return 0;
 }
 
 
 int scanf(const char *format, char * InputBuffer)
 { 
-	int Itr=0;
-	InputBuffer=InputMessageBuf[Itr];
-	Itr++;
+	static int MsgBufIndex=0;
+		
+	if(ResetScanfMsgIndex==1)
+	{
+		MsgBufIndex=0;  // Resetting the static variable to avoid the array index over flow error
+		ResetScanfMsgIndex=0;
+	}
+	
+	ConsoleInputFormat[MsgBufIndex]=Format;
+	InputBuffer=InputMessageBuf[MsgBufIndex];
+	
+	scanf_Func_CallCount++;
+	
+	MsgBufIndex++;
 	
 	return 0;
 }
@@ -44,9 +60,10 @@ int printf(const char *format, float Temp_MinValue, float Temp_MinValue, float T
 	static int MsgIndex=0;
 	
 	
-	if(MsgIndex>=15)
+	if(ResetPrintfMsgIndex==1)
 	{
 		MsgIndex=0;  // Resetting the static variable to avoid the array index over flow error
+		ResetPrintfMsgIndex=0;
 	}
 		
 	ConsoleOutputFormat[MsgIndex]=Format;
