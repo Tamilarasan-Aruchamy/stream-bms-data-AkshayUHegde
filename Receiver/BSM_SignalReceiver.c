@@ -174,7 +174,7 @@ int CountDots(char token,int *DotCounter)
 
 int CountNonDigit(char token,int *NonDigitCounter)  
 {
-	if((token < '0' || token > '9') && token!='.')  // Count the Non Digit letter in Signal Value except(Dot). (e.g, Input = 4.5e5 , "NonDigitCounter" will be 1)
+	if((token < '0' || token > '9') && (token!='.' && token!='-'))  // Count the Non Digit letter in Signal Value except(Dot AND Minus). (e.g, Input = 4.5e5 , "NonDigitCounter" will be 1)
         	{
                   *NonDigitCounter=*NonDigitCounter+1;
         	}
