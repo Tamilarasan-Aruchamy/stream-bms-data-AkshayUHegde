@@ -44,7 +44,7 @@ int scanf(const char *format, char * InputBuffer)
 		ResetScanfMsgIndex=0;
 	}
 	
-	ConsoleInputFormat[MsgBufIndex]=Format;
+	ConsoleInputFormat[MsgBufIndex]=format;
 	InputBuffer=InputMessageBuf[MsgBufIndex];
 	
 	scanf_Func_CallCount++;
@@ -66,7 +66,7 @@ int printf(const char *format, float Temp_MinValue, float Temp_MaxValue, float T
 		ResetPrintfMsgIndex=0;
 	}
 		
-	ConsoleOutputFormat[MsgIndex]=Format;
+	ConsoleOutputFormat[MsgIndex]=format;
 	ConsoleOutputTemperatureMin[MsgIndex]=Temp_MinValue;
 	ConsoleOutputTemperatureMax[MsgIndex]=Temp_MaxValue;
 	ConsoleOutputTemperatureMovingAvg[MsgIndex]=Temp_MovingAvg;
