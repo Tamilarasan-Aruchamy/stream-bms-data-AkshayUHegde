@@ -30,7 +30,7 @@ void Assert :: AssertOutput(int Index,MinMaxAvg* Expected_MinMaxAvg)
 	
 	REQUIRE(ConsoleOutputChargeRateMin[Index]==Expected_MinMaxAvg[1].MinValue);
 	REQUIRE(ConsoleOutputChargeRateMax[Index]==Expected_MinMaxAvg[1].MaxValue);
-	REQUIRE(abs(ConsoleOutputChargeRateMovingAvg[Index]-Expected_MinMaxAvg[1].MovingAvg)<0.1); */
+	REQUIRE(abs(ConsoleOutputChargeRateMovingAvg[Index]-Expected_MinMaxAvg[1].MovingAvg)<0.1);
 }
 
 
