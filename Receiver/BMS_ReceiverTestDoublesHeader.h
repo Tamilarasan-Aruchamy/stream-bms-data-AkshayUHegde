@@ -12,5 +12,5 @@ extern int scanf_Func_CallCount;
 
 
 extern int ResetTestInterface();
-extern int scanf(const char *format, char * InputBuffer);
-extern int printf(const char *format, float Temp_MinValue, float Temp_MaxValue, float Temp_MovingAvg, float ChargeRate_MinValue, float ChargeRate_MaxValue, float ChargeRate_MovingAvg);
+extern int scanf(char *format, char * InputBuffer);
+extern int printf(char *format, float Temp_MinValue, float Temp_MaxValue, float Temp_MovingAvg, float ChargeRate_MinValue, float ChargeRate_MaxValue, float ChargeRate_MovingAvg);
