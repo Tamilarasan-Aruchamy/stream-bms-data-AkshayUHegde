@@ -30,7 +30,7 @@ int BSM_SignalReceiver()
     char BSM_InputMessage[100];
                                     
     InputSignalConfig InputData[2]={{NULL,32767},{NULL,32767}};
-    int returnval,return=0;
+    int returnval,returnval=0;
     MinMaxAvg Temp={32767,-32767,0},ChargeRate={32767,-32767,0};
     
     float arrNumbers[2][5] = {0};
@@ -59,11 +59,11 @@ int BSM_SignalReceiver()
                
                
               printf("TempMin:%f TempMax:%f TempAvg:%f ChargeRateMin:%f ChargeRateMax:%f ChargeRateAvg:%f\n", Temp.MinValue,Temp.MaxValue,Temp.MovingAvg,ChargeRate.MinValue,ChargeRate.MaxValue,ChargeRate.MovingAvg);
-               return=1;
+               returnval=1;
             }
 	}
     
-    return return;
+    return returnval;
 }
 
 int Calculate_MinMax(float SignalValue,MinMaxAvg *MinMax)
