@@ -1,6 +1,6 @@
 extern char InputMessageBuf[15][100];
-extern char ConsoleInputFormat[15][5];
-extern char ConsoleOutputFormat[15][200];
+extern char ConsoleScanfFormat[15][5];
+extern char ConsolePrintfFormat[15][200];
 extern float	ConsoleOutputChargeRateMin[15];
 extern float	ConsoleOutputChargeRateMax[15];
 extern float	ConsoleOutputChargeRateMovingAvg[15];
