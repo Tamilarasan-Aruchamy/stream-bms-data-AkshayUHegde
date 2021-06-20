@@ -146,7 +146,7 @@ int Split(char str[100],InputSignalConfig* BSM_Signals)
 {
        const char s[6] = "{: ,}";
        char *token;
-       bool InputMsgFormateError=0;
+       int InputMsgFormateError=0;
        int cnt=0,NonDigitCounter=0,DotCounter=0;
            /* get the first token */
         token = strtok(str, s);
