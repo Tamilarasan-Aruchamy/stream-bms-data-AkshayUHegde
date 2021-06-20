@@ -5,7 +5,7 @@
 /******************************************* /MacroFunction/Variable Declarations *******************************************/ 
 
 int scanf(const char *format, char * InputBuffer);
-int printf(const char *format, float Temp_MinValue, float Temp_MinValue, float Temp_MovingAvg, float ChargeRate_MinValue, float ChargeRate_MinValue, float ChargeRate_MovingAvg);
+int printf(const char *format, float Temp_MinValue, float Temp_MaxValue, float Temp_MovingAvg, float ChargeRate_MinValue, float ChargeRate_MaxValue, float ChargeRate_MovingAvg);
 
 char InputMessageBuf[15][100];
 char* ConsoleInputFormat[5];
@@ -55,7 +55,7 @@ int scanf(const char *format, char * InputBuffer)
 }
 
 
-int printf(const char *format, float Temp_MinValue, float Temp_MinValue, float Temp_MovingAvg, float ChargeRate_MinValue, float ChargeRate_MinValue, float ChargeRate_MovingAvg)
+int printf(const char *format, float Temp_MinValue, float Temp_MaxValue, float Temp_MovingAvg, float ChargeRate_MinValue, float ChargeRate_MaxValue, float ChargeRate_MovingAvg)
 {	
 	static int MsgIndex=0;
 	
