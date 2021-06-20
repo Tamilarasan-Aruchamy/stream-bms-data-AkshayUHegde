@@ -2,22 +2,21 @@
 
 #include "SignalReceiver.h"
 #include <stddef.h>
-#include <stdint.h>
 #include <stdio.h>
-#include <limits.h>
 
 /******************************************* /MacroFunction/Variable Declarations *******************************************/ 
 
-int scanf(char* Format, char * InputBuffer)
-int printf(char* Format, float Temp_MinValue, float Temp_MinValue, float Temp_MovingAvg, float ChargeRate_MinValue, float ChargeRate_MinValue, float ChargeRate_MovingAvg);
+int scanf(const char *format, char * InputBuffer)
+int printf(const char *format, float Temp_MinValue, float Temp_MinValue, float Temp_MovingAvg, float ChargeRate_MinValue, float ChargeRate_MinValue, float ChargeRate_MovingAvg);
 
+char InputMessageBuf[15][100];
 char* ConsoleOutputFormat[15];
-float	ConsoleOutputTemperatureMin[MsgIndex];
-float	ConsoleOutputTemperatureMax[MsgIndex];
-float	ConsoleOutputTemperatureMovingAvg[MsgIndex];
-float	ConsoleOutputChargeRateMin[MsgIndex];
-float	ConsoleOutputChargeRateMax[MsgIndex];
-float	ConsoleOutputChargeRateMovingAvg[MsgIndex];
+float	ConsoleOutputTemperatureMin[15];
+float	ConsoleOutputTemperatureMax[15];
+float	ConsoleOutputTemperatureMovingAvg[15];
+float	ConsoleOutputChargeRateMin[15];
+float	ConsoleOutputChargeRateMax[15];
+float	ConsoleOutputChargeRateMovingAvg[15];
 int printf_Func_CallCount=0;
 
 
@@ -30,36 +29,17 @@ int ResetTestInterface()
 }
 
 
-int scanf(char* Format, char * InputBuffer)
+int scanf(const char *format, char * InputBuffer)
 { 
-	int Rand_Temperature[15]={0,1,2,3,4,5,6,7,RAND_MAX-7,RAND_MAX-6,RAND_MAX-5,RAND_MAX-4,RAND_MAX-3,RAND_MAX-2,RAND_MAX-1};
-	int Rand_SOC[15]={0,1,2,3,4,5,6,7,RAND_MAX-7,RAND_MAX-6,RAND_MAX-5,RAND_MAX-4,RAND_MAX-3,RAND_MAX-2,RAND_MAX-1};
+	int Itr=0;
+	InputBuffer=InputMessageBuf[Itr];
+	Itr++;
 	
-	static int Itr=0;
-	int RandomValue=0;
-	
-	if(Itr>=30)
-	{
-		Itr=0;  // Resetting the static variable to avoid the array index over flow error
-	}
-	
-	
-	if(!(Itr%2))
-	{
-		RandomValue=Rand_Temperature[Itr/2];
-		Itr++;
-	}
-	else
-	{
-		RandomValue=Rand_SOC[Itr/2];
-		Itr++;
-	}
-	
-	return RandomValue;
+	return 0;
 }
 
 
-int printf(char* Format, float Temp_MinValue, float Temp_MinValue, float Temp_MovingAvg, float ChargeRate_MinValue, float ChargeRate_MinValue, float ChargeRate_MovingAvg)
+int printf(const char *format, float Temp_MinValue, float Temp_MinValue, float Temp_MovingAvg, float ChargeRate_MinValue, float ChargeRate_MinValue, float ChargeRate_MovingAvg)
 {	
 	static int MsgIndex=0;
 	
