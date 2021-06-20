@@ -40,7 +40,7 @@ int BSM_SignalReceiver()
 
 	for(int i=0; i<15 ; i++)
 		{	
-		  scanf("%s",BSM_InputMessageBuf);  // Read from Console Buffer
+		  scanf("%[^\n]%*c",BSM_InputMessageBuf);  // Read from Console Buffer
 		  FormatErrorDetected=delimitAndValidateMessage(BSM_InputMessageBuf,InputData);
 		
 		  if(!FormatErrorDetected)
