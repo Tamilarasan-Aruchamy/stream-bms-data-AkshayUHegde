@@ -18,8 +18,8 @@ float movingAvg(float *ptrArrNumbers, float *ptrSum, int pos, int len, float nex
 int delimit(char str[100],InputSignalConfig* BSM_Signals);
 int Split(char str[100],InputSignalConfig* BSM_Signals);
 int IsValidSignalValue(InputSignalConfig* BSM_Signals, char *token, int * cnt, int *InputMsgFormateError);
-void CountDots(char *token,int *DotCounter);
-void CountNonDigit(char *token,int *NonDigitCounter);
+void CountDots(char token,int *DotCounter);
+void CountNonDigit(char token,int *NonDigitCounter);
 int IsValidSignalName(InputSignalConfig* BSM_Signals, char *token, int * cnt, int *InputMsgFormateError);
 
 /*************************************************** function Definitions **************************************************/ 
@@ -49,7 +49,7 @@ int BSM_SignalReceiver()
 
   int pos = 0;
   float sum[2] = {0};
-  int len=5;
+  int len=0;
 
     for(int i=0; i<5 ; i++)
 	{
@@ -72,16 +72,14 @@ int BSM_SignalReceiver()
                 Calculate_MinMax(InputData[0].SignalValue, &Temp);
                 Calculate_MinMax(InputData[1].SignalValue, &ChargeRate);
 
-               
-            //   if(len<5)
-              //      {
-             //       len++;
-             //       }
+               if(len<5)
+                    {
+                    len++;
+                    }
                 Temp.MovingAvg = movingAvg(arrNumbers[0], &sum[0], pos, len, InputData[0].SignalValue);
-               // printf("%f\n", sum[0]);
                 ChargeRate.MovingAvg = movingAvg(arrNumbers[1], &sum[1], pos, len, InputData[1].SignalValue);
                 pos++;
-                if (pos >= 5){
+                if (pos >= sizeof(arrNumbers) / sizeof(int)){
                     pos = 0;
                     }
                
@@ -106,6 +104,7 @@ int Calculate_MinMax(float SignalValue,MinMaxAvg *MinMax)
         }
 
 }
+
 
 
 float movingAvg(float *ptrArrNumbers, float *ptrSum, int pos, int len, float nextNum)
@@ -224,6 +223,7 @@ void CountNonDigit(char token,int *NonDigitCounter)
                     }
 
 }
+
 
 int IsValidSignalName(InputSignalConfig* BSM_Signals, char *token, int * cnt, int*InputMsgFormateError)
 {
