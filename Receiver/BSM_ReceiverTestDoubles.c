@@ -1,6 +1,6 @@
 /******************************************************* Header_Files *******************************************************/ 
 
-#include "SignalProvider.h"
+#include "SignalReceiver.h"
 #include <stddef.h>
 #include <stdint.h>
 #include <stdio.h>
@@ -8,14 +8,16 @@
 
 /******************************************* /MacroFunction/Variable Declarations *******************************************/ 
 
-#define RAND_MAX INT_MAX
-
-int rand();
-int printf(char* Format, float Temperature, float SOC);
+int scanf(char* Format, char * InputBuffer)
+int printf(char* Format, float Temp_MinValue, float Temp_MinValue, float Temp_MovingAvg, float ChargeRate_MinValue, float ChargeRate_MinValue, float ChargeRate_MovingAvg);
 
 char* ConsoleOutputFormat[15];
-float ConsoleOutputTemperature[15];
-float ConsoleOutputSOC[15];
+float	ConsoleOutputTemperatureMin[MsgIndex];
+float	ConsoleOutputTemperatureMax[MsgIndex];
+float	ConsoleOutputTemperatureMovingAvg[MsgIndex];
+float	ConsoleOutputChargeRateMin[MsgIndex];
+float	ConsoleOutputChargeRateMax[MsgIndex];
+float	ConsoleOutputChargeRateMovingAvg[MsgIndex];
 int printf_Func_CallCount=0;
 
 
@@ -28,7 +30,7 @@ int ResetTestInterface()
 }
 
 
-int rand()
+int scanf(char* Format, char * InputBuffer)
 { 
 	int Rand_Temperature[15]={0,1,2,3,4,5,6,7,RAND_MAX-7,RAND_MAX-6,RAND_MAX-5,RAND_MAX-4,RAND_MAX-3,RAND_MAX-2,RAND_MAX-1};
 	int Rand_SOC[15]={0,1,2,3,4,5,6,7,RAND_MAX-7,RAND_MAX-6,RAND_MAX-5,RAND_MAX-4,RAND_MAX-3,RAND_MAX-2,RAND_MAX-1};
@@ -57,7 +59,7 @@ int rand()
 }
 
 
-int printf(char* Format, float Temperature, float SOC)
+int printf(char* Format, float Temp_MinValue, float Temp_MinValue, float Temp_MovingAvg, float ChargeRate_MinValue, float ChargeRate_MinValue, float ChargeRate_MovingAvg)
 {	
 	static int MsgIndex=0;
 	
@@ -68,8 +70,12 @@ int printf(char* Format, float Temperature, float SOC)
 	}
 		
 	ConsoleOutputFormat[MsgIndex]=Format;
-	ConsoleOutputTemperature[MsgIndex]=Temperature;
-	ConsoleOutputSOC[MsgIndex]=SOC;
+	ConsoleOutputTemperatureMin[MsgIndex]=Temp_MinValue;
+	ConsoleOutputTemperatureMax[MsgIndex]=Temp_MaxValue;
+	ConsoleOutputTemperatureMovingAvg[MsgIndex]=Temp_MovingAvg;
+	ConsoleOutputChargeRateMin[MsgIndex]=ChargeRate_MinValue;
+	ConsoleOutputChargeRateMax[MsgIndex]=ChargeRate_MaxValue;
+	ConsoleOutputChargeRateMovingAvg[MsgIndex]=ChargeRate_MovingAvg;
 
 	printf_Func_CallCount++;
 	
