@@ -10,7 +10,6 @@ int printf(char *format, float Temp_MinValue, float Temp_MaxValue, float Temp_Mo
 
 char InputMessageBuf[15][100];
 char ConsoleInputFormat[15][5];
-char ConsoleInputValue[15][100];
 char ConsoleOutputFormat[15][200];
 float	ConsoleOutputTemperatureMin[15];
 float	ConsoleOutputTemperatureMax[15];
@@ -48,7 +47,6 @@ int scanf(char *format, char * InputBuffer)
 	
 	strcpy(ConsoleInputFormat[MsgBufIndex],format);
 	strcpy(InputBuffer,InputMessageBuf[MsgBufIndex]);
-	strcpy(ConsoleInputValue[MsgBufIndex],InputBuffer);
 	
 	scanf_Func_CallCount++;
 	
