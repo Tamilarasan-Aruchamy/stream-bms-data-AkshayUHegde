@@ -1,6 +1,6 @@
 
 
-name: Receiver-Build and Run
+name: Sender_Receiver Run
 
 on: [push, pull_request]
 
