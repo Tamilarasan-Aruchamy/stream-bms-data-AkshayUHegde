@@ -8,7 +8,8 @@ int scanf(char *format, char * InputBuffer);
 int printf(char *format, float Temp_MinValue, float Temp_MaxValue, float Temp_MovingAvg, float ChargeRate_MinValue, float ChargeRate_MaxValue, float ChargeRate_MovingAvg);
 
 char InputMessageBuf[15][100];
-char* ConsoleInputFormat[5];
+char* ConsoleInputFormat[15];
+char* ConsoleInputValue[15];
 char* ConsoleOutputFormat[15];
 float	ConsoleOutputTemperatureMin[15];
 float	ConsoleOutputTemperatureMax[15];
@@ -46,6 +47,7 @@ int scanf(char *format, char * InputBuffer)
 	
 	ConsoleInputFormat[MsgBufIndex]=format;
 	InputBuffer=InputMessageBuf[MsgBufIndex];
+	ConsoleInputValue[MsgBufIndex]=InputBuffer;
 	
 	scanf_Func_CallCount++;
 	
