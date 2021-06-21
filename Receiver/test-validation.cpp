@@ -74,20 +74,20 @@ TEST_CASE("Test the wrong Input Message")
 	ResetTestInterface();
 	Assert Output;
 	char BSM_InputMessage_TestData_2[15][100]={"{\"charge_rate\": 8.69, \"temp_in_c\": 15.26}",\
-                                    "{\"charge_ratee\": 1.69, \"temp_in_c\": 16.26}",\
-                                    "{\"charge_rate\": 2.69, \"temp_in_ca\": 121.26}",\
+                                    "{\"charge_ratee\": 1.69, \"temp_in_c\": 16.26}",   /* Invalid Message. this will not consisder for Min,Max and Avg calculation */ \
+                                    "{\"charge_rate\": 2.69, \"temp_in_ca\": 121.26}",   /* Invalid Message. this will not consisder for Min,Max and Avg calculation */ \
                                     "{\"charge_rate\": 3.69, \"temp_in_c\": 18.26}",\
                                     "{\"charge_rate\": 4.69, \"temp_in_c\": 19.26}",\
                                     "{\"charge_rate\": 5.69, \"temp_in_c\": 110.26}",\
-                                    "{\"charge_rate\": 6..69, \"temp_in_c\": 111.26}",\
+                                    "{\"charge_rate\": 6..69, \"temp_in_c\": 111.26}",   /* Invalid Message. this will not consisder for Min,Max and Avg calculation */ \
                                     "{\"charge_rate\": 7.69, \"temp_in_c\": 112.26}",\
                                     "{\"charge_rate\": 8.69, \"temp_in_c\": 113.26}",\
-                                    "{\"charge_rate\": 9.69, \"temp_in_c\": b114.26}",\
+                                    "{\"charge_rate\": 9.69, \"temp_in_c\": b114.26}",   /* Invalid Message. this will not consisder for Min,Max and Avg calculation */ \
                                     "{\"charge_rate\": 10.69, \"temp_in_c\": 115.26}",\
-                                    "\"charge_rate\": 11.69, \"temp_in_c\": 116.26}",\
-                                    "{\"charge_rate\": 12.69, \"temp_in_c\": 117.26}",\
-                                    "{\"charge_rate\": 13.69, \"temp_in_c\": 118.26",\
-                                    "{\"charge_rate\": 14.69, \"temp_in_c\": 19.26 \"voltage\": 19.26}"};
+                                    "\"charge_rate\": 11.69, \"temp_in_c\": 116.26}",   /* Invalid Message. this will not consisder for Min,Max and Avg calculation */ \
+                                    "{\"charge_rate\": 12.69, \"temp_in_c\": 11-7.26}",  /* Invalid Message. this will not consisder for Min,Max and Avg calculation */ \
+                                    "{\"charge_rate\": 13.69, \"temp_in_c\": 118.26",   /* Invalid Message. this will not consisder for Min,Max and Avg calculation */ \
+                                    "{\"charge_rate\": 14.69, \"temp_in_c\": 19.26 \"voltage\": 19.26}"};  /* Invalid Message. this will not consisder for Min,Max and Avg calculation */ 
 	
 					/* charge_rate {Min,Max and Avg}  Temp  {Min,Max and Avg} */
 	MinMaxAvg Expected_MinMaxAvg[8][2]={{{8.69,8.69,1.738000},{15.26,15.26,3.052000}},\
@@ -96,8 +96,7 @@ TEST_CASE("Test the wrong Input Message")
 					       {{3.69,8.69,4.552000},{15.26,110.26,32.608002}},\
 					       {{3.69,8.69,6.090000},{15.26,112.26,55.060005}},\
 					       {{3.69,8.69,6.090000},{15.26,113.26,74.660004}},\
-					       {{3.69,10.69,7.490000},{15.26,115.26,94.060005}},\
-					       {{3.69,12.69,9.090000},{15.26,117.26,113.659996}}};
+					       {{3.69,10.69,7.490000},{15.26,115.26,94.060005}}};
 	
 	for(int i=0;i<15;i++)
 		{
