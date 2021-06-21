@@ -20,7 +20,7 @@ float movingAvg(float *ptrArrNumbers, float *ptrSum, int pos, int len, float nex
 int delimit(char str[100],InputSignalConfig* BSM_Signals);
 int delimitAndValidateSignals(char str[100],InputSignalConfig* BSM_Signals);
 int IsValidSignalValue(InputSignalConfig* BSM_Signals, char *token, int * cnt, int *FormatErrorDetected);
-int CountMinusCharError(int Itr,char token,int *NonDigitCounter);
+int CountMinusCharError(int itr,char token,int *NonDigitCounter);
 int CountDots(char token,int *DotCounter);
 int CountNonDigit(char token,int *NonDigitCounter);
 int IsValidSignalName(InputSignalConfig* BSM_Signals, char *token, int * cnt, int *FormatErrorDetected);
@@ -148,7 +148,7 @@ int IsValidSignalValue(InputSignalConfig* BSM_Signals, char *token, int * cnt, i
     	int NonDigitCounter=0,DotCounter=0;
    
 	for(int itr=0;itr<strlen(token);itr++){
-			CountMinusCharError(Itr,token[itr],&NonDigitCounter);
+			CountMinusCharError(itr,token[itr],&NonDigitCounter);
     			CountDots(token[itr],&DotCounter);
     			CountNonDigit(token[itr],&NonDigitCounter);
 			}
@@ -165,9 +165,9 @@ int IsValidSignalValue(InputSignalConfig* BSM_Signals, char *token, int * cnt, i
                 
 }
 
-int CountMinusCharError(int Itr,char token,int *NonDigitCounter)  
+int CountMinusCharError(int itr,char token,int *NonDigitCounter)  
 {
-	if(Itr!=0){
+	if(itr!=0){
 	if(token=='-'){ 			// Count the wrong position "-" in Signal Value. (e.g, Input = 4.55- , "NonDigitCounter" will be 1)    
 		  *NonDigitCounter=*NonDigitCounter+1;
 		}
