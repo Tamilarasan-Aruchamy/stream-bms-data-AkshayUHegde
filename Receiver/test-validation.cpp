@@ -15,7 +15,7 @@ class Assert {
 };
 
 
-TEST_CASE("Test the Func Call,Min, Max and Avg") 
+TEST_CASE("ValidTest - Test the Func Call,Min, Max and Avg") 
 {
 	ResetTestInterface();
 	Assert Output;
@@ -69,7 +69,7 @@ TEST_CASE("Test the Func Call,Min, Max and Avg")
 	
 }
 
-TEST_CASE("Test the wrong Input Message") 
+TEST_CASE("InvalidTest - Test the wrong Input Message") 
 {
 	ResetTestInterface();
 	Assert Output;
